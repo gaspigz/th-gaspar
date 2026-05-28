@@ -21,7 +21,7 @@ Edges : Undirected, weighted. Two people get an edge when they share a
 
         These four signals are *accumulated* per pair (see `add_edge`), so the
         final edge weight is the sum of every shared-affiliation signal between
-        two people — not a count of shared affiliations.
+        two people - not a count of shared affiliations.
 
 Damping
 -------
@@ -266,7 +266,7 @@ G = nx.Graph()
 for p in people:
     G.add_node(p["id"], **{k: v for k, v in p.items() if k != "id"})
 
-# add_edge — idempotent weighted edge builder
+# add_edge - idempotent weighted edge builder
 # ------------------------------------------------
 # Because multiple companies or schools can link the same pair of people,
 # this function is called many times for the same (u, v) pair. Rather than
@@ -299,7 +299,7 @@ for i, cos in enumerate(person_companies):
     for cid, cname, s, e in cos:
         seen_keys.add(cid)
         co_to_people[cid].append((i, s, e, cname))
-    # de-dup person within company (keep all stints — overlap math handles them)
+    # de-dup person within company (keep all stints - overlap math handles them)
 
 for cid, members in co_to_people.items():
     size = company_size[cid]
@@ -515,7 +515,7 @@ except OSError as exc:
 
 # ---------- visualisations ---------------------------------------------------
 
-# static png — spring layout, colour by community, size by weighted degree
+# static png - spring layout, colour by community, size by weighted degree
 plt.figure(figsize=(16, 12))
 pos = nx.spring_layout(giant, seed=42, k=0.45, iterations=120, weight="weight")
 node_colors = [partition[n] for n in giant.nodes()]

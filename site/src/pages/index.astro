@@ -14,8 +14,8 @@ const faviconUrl = `${base}/favicon.svg`;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Personal Network — Graph Analysis</title>
-    <meta name="description" content="Network analysis of an enriched personal LinkedIn connections export — 248 nodes, 532 edges, 9 communities." />
+    <title>Personal Network - Graph Analysis</title>
+    <meta name="description" content="Network analysis of an enriched personal LinkedIn connections export - 248 nodes, 532 edges, 9 communities." />
     <link rel="icon" type="image/svg+xml" href={faviconUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -75,7 +75,7 @@ const faviconUrl = `${base}/favicon.svg`;
       <section class="overview">
         <h1>How well-connected is this network?</h1>
         <p class="lead">
-          The export is 248 enriched profile records — not a graph. To answer the question
+          The export is 248 enriched profile records - not a graph. To answer the question
           we project a bipartite People ↔ Affiliations graph: two people get an edge when
           they share an employer or school, weighted by tenure overlap and damped by
           affiliation size. The result is a moderately dense small-world with a strong
@@ -101,7 +101,7 @@ const faviconUrl = `${base}/favicon.svg`;
             The network splits cleanly into a <b style="color:var(--text)">Clemson alumni stratum</b>
             (university, sub-schools, and the consulting / finance / healthcare firms its graduates
             cluster into) and a <b style="color:var(--text)">startup-operator stratum</b>
-            (Ascendancy's founding circle, the Invisible Technologies orbit, and Social Slooth — the
+            (Ascendancy's founding circle, the Invisible Technologies orbit, and Social Slooth - the
             ego's earlier startup). The two are joined by a small number of broker nodes.
             Modularity of 0.72 quantifies how clean that split is.
           </p>
@@ -123,7 +123,7 @@ const faviconUrl = `${base}/favicon.svg`;
           <div id="legend-communities"></div>
         </div>
         <div class="info-panel" id="info-panel">
-          <div class="info-name" id="info-name">—</div>
+          <div class="info-name" id="info-name">-</div>
           <div class="info-line" id="info-title"></div>
           <div class="info-line" id="info-location"></div>
           <div class="info-stats" id="info-stats"></div>
@@ -212,7 +212,7 @@ const faviconUrl = `${base}/favicon.svg`;
         })
         .catch(err => {
           clearInterval(stageTimer);
-          status.textContent = "Failed to load graph.json — " + err.message;
+          status.textContent = "Failed to load graph.json - " + err.message;
         });
 
       // ----------------------- Overview -------------------
@@ -236,13 +236,13 @@ const faviconUrl = `${base}/favicon.svg`;
         // Hubs by eigenvector
         const hubs = [...data.nodes].sort((a, b) => b.eigenvector - a.eigenvector).slice(0, 8);
         document.getElementById("hubs-list").innerHTML = hubs.map(n =>
-          `<li><span><b>${escapeHtml(n.name || "—")}</b><br><span style="color:var(--text-fade);font-size:12px">${escapeHtml(n.title || "")} ${n.company ? "· " + escapeHtml(n.company) : ""}</span></span><span class="num">${n.eigenvector.toFixed(3)}</span></li>`
+          `<li><span><b>${escapeHtml(n.name || "-")}</b><br><span style="color:var(--text-fade);font-size:12px">${escapeHtml(n.title || "")} ${n.company ? "· " + escapeHtml(n.company) : ""}</span></span><span class="num">${n.eigenvector.toFixed(3)}</span></li>`
         ).join("");
 
         // Brokers by betweenness
         const brokers = [...data.nodes].sort((a, b) => b.betweenness - a.betweenness).slice(0, 8);
         document.getElementById("brokers-list").innerHTML = brokers.map(n =>
-          `<li><span><b>${escapeHtml(n.name || "—")}</b><br><span style="color:var(--text-fade);font-size:12px">${escapeHtml(n.title || "")} ${n.company ? "· " + escapeHtml(n.company) : ""}</span></span><span class="num">${n.betweenness.toFixed(3)}</span></li>`
+          `<li><span><b>${escapeHtml(n.name || "-")}</b><br><span style="color:var(--text-fade);font-size:12px">${escapeHtml(n.title || "")} ${n.company ? "· " + escapeHtml(n.company) : ""}</span></span><span class="num">${n.betweenness.toFixed(3)}</span></li>`
         ).join("");
 
         // Header meta
@@ -318,7 +318,7 @@ const faviconUrl = `${base}/favicon.svg`;
           const id = params.nodes[0];
           const n = data.nodes.find(x => x.id === id);
           if (!n) return;
-          document.getElementById("info-name").textContent = n.name || "—";
+          document.getElementById("info-name").textContent = n.name || "-";
           document.getElementById("info-title").textContent = [n.title, n.company].filter(Boolean).join(" @ ");
           document.getElementById("info-location").textContent = n.location || "";
           document.getElementById("info-stats").innerHTML = `
