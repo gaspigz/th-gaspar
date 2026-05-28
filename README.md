@@ -19,6 +19,19 @@ otherwise-disconnected communities? Which are likely to go dormant because they
 have no shared context with anyone else in the network? Who is the right
 introduction path between any two people?*
 
+## Live demo
+
+**→ https://gaspigz.github.io/th-gaspar/**
+
+An interactive report with four tabs — Overview (metrics + top hubs/brokers),
+Network (the full 248-node graph, click any node), Communities, and the full
+written Conclusions. Deployed automatically from `main` via GitHub Actions
+(`.github/workflows/deploy.yml`).
+
+> First-time setup: in the repo's **Settings → Pages**, set **Source** to
+> **GitHub Actions**. The workflow then builds and publishes on every push to
+> `main` that touches `site/`.
+
 ---
 
 ## Quick start

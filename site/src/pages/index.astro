@@ -1,6 +1,13 @@
 ---
 import "../styles/global.css";
 import { Content as Report } from "../data/REPORT.md";
+
+// Base-aware asset URLs so paths work both locally and on GitHub Pages
+// (where the site is served under /th-gaspar/). import.meta.env.BASE_URL
+// resolves to the configured `base` with a trailing slash.
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const graphUrl = `${base}/graph.json`;
+const faviconUrl = `${base}/favicon.svg`;
 ---
 
 <html lang="en">
@@ -9,13 +16,13 @@ import { Content as Report } from "../data/REPORT.md";
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Personal Network — Graph Analysis</title>
     <meta name="description" content="Network analysis of an enriched personal LinkedIn connections export — 248 nodes, 532 edges, 9 communities." />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={faviconUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <script is:inline src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
   </head>
-  <body>
+  <body data-graph-url={graphUrl}>
     <!-- Loader -->
     <div class="loader" id="loader">
       <div class="loader-graph">
@@ -187,7 +194,8 @@ import { Content as Report } from "../data/REPORT.md";
       const colorFor = c => PALETTE[((c % PALETTE.length) + PALETTE.length) % PALETTE.length];
 
       // ----------------------- Load + render --------------
-      fetch("/graph.json")
+      const GRAPH_URL = document.body.dataset.graphUrl || "/graph.json";
+      fetch(GRAPH_URL)
         .then(r => r.json())
         .then(data => {
           window.__data = data;

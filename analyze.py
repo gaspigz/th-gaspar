@@ -3,27 +3,56 @@ Network analysis of a personal LinkedIn-style connections export.
 
 Graph model
 -----------
-Nodes  : 248 people (one per record).
-Edges  : Undirected, weighted. Two people get an edge when they share a
-         real-world affiliation. Three edge "channels" are merged into a
-         single weighted graph:
+Nodes : people (one per record).
+Edges : Undirected, weighted. Two people get an edge when they share a
+        real-world affiliation. Four edge "channels" are merged into a single
+        weighted graph; every weight is then scaled by a per-affiliation
+        `damping` factor (see "Damping" below):
 
-           1. coworker_overlap  - same company_id, tenure windows overlap
-                                  (weight = months of overlap, capped at 60)
-           2. coworker_shared   - same company_id, no/unknown overlap
-                                  (weight = 2; weaker signal of "worked together")
-           3. classmate_overlap - same school, study windows overlap
-                                  (weight = months of overlap / 6, capped at 12)
-           4. classmate_shared  - same school, no/unknown overlap (weight = 1)
+          1. coworker_overlap   same company_id, tenure windows overlap
+                                 weight = min(months, 60) / 12 * damping
+                                 (years of overlap, capped at 5, then damped)
+          2. coworker_shared    same company_id, no or unknown overlap
+                                 weight = 0.5 * damping
+          3. classmate_overlap  same school, study windows overlap
+                                 weight = min(months, 48) / 12 * damping
+          4. classmate_shared   same school, no or unknown overlap
+                                 weight = 0.25 * damping
 
-         Edges from very large employers (>1000 people in this dataset's
-         affiliations, or famous mega-employers we know are noisy) are
-         downweighted: alumni of "Amazon" or "Deloitte" shouldn't link the
-         whole graph. We compute a per-company size and divide each shared-
-         company edge by log(1 + size).
+        These four signals are *accumulated* per pair (see `add_edge`), so the
+        final edge weight is the sum of every shared-affiliation signal between
+        two people — not a count of shared affiliations.
 
-         This is a *projection* of an underlying bipartite graph
-         (People <-> Affiliations). The projection is what we analyse.
+Damping
+-------
+        Large affiliations are weak evidence of an actual relationship: two of
+        50,000 Amazon alumni almost certainly do not know each other, whereas
+        two of a 6-person startup almost certainly do. Two mechanisms handle
+        this:
+
+          * Hard cap: affiliations with more than COMPANY_NOISE_CAP (25) /
+            SCHOOL_NOISE_CAP (30) members are dropped entirely. A university
+            that 100+ connections attended would otherwise link the whole
+            graph and wash out real structure.
+          * Soft damping: every surviving edge is multiplied by
+            damping = 1 / log(2 + size), so a 25-person employer contributes
+            roughly a third of the weight of a 2-person one.
+
+        Both thresholds are module-level constants and easy to tune.
+
+        The result is a *projection* of an underlying bipartite graph
+        (People <-> Affiliations). The projection is what we analyse.
+
+Performance / complexity
+------------------------
+        Edges are built by grouping people per affiliation and connecting all
+        pairs within each group, i.e. O(sum over affiliations of size^2). The
+        hard noise cap bounds each group at <= ~30 members (<= ~435 pairs), so
+        total work is linear in the number of affiliations and the script runs
+        in well under a second on this 248-person dataset. For very large
+        inputs the quadratic-within-group term would dominate; the cap keeps it
+        bounded, and the natural next step (see REPORT.md) is to connect only
+        on tenure overlap, which yields a far sparser graph.
 
 Output
 ------
