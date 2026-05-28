@@ -1,0 +1,332 @@
+---
+import "../styles/global.css";
+import { Content as Report } from "../data/REPORT.md";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Personal Network — Graph Analysis</title>
+    <meta name="description" content="Network analysis of an enriched personal LinkedIn connections export — 248 nodes, 532 edges, 9 communities." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <script is:inline src="https://unpkg.com/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
+  </head>
+  <body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+      <div class="loader-graph">
+        <svg viewBox="-90 -90 180 180" aria-hidden="true">
+          <line class="edge" x1="0"   y1="-60" x2="55"  y2="-20" />
+          <line class="edge" x1="55"  y1="-20" x2="40"  y2="50" />
+          <line class="edge" x1="40"  y1="50"  x2="-40" y2="50" />
+          <line class="edge" x1="-40" y1="50"  x2="-55" y2="-20" />
+          <line class="edge" x1="-55" y1="-20" x2="0"   y2="-60" />
+          <line class="edge" x1="0"   y1="-60" x2="0"   y2="0" />
+          <line class="edge" x1="55"  y1="-20" x2="0"   y2="0" />
+          <line class="edge" x1="40"  y1="50"  x2="0"   y2="0" />
+          <line class="edge" x1="-40" y1="50"  x2="0"   y2="0" />
+          <line class="edge" x1="-55" y1="-20" x2="0"   y2="0" />
+          <circle class="node" cx="0"   cy="-60" r="6" />
+          <circle class="node" cx="55"  cy="-20" r="6" />
+          <circle class="node" cx="40"  cy="50"  r="6" />
+          <circle class="node" cx="-40" cy="50"  r="6" />
+          <circle class="node" cx="-55" cy="-20" r="6" />
+          <circle class="node" cx="0"   cy="0"   r="9" />
+        </svg>
+      </div>
+      <div class="loader-label">Building graph</div>
+      <div class="loader-status" id="loader-status">Parsing 248 enriched profiles…</div>
+      <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <span class="brand-name">Network Graph Analysis</span>
+        <span class="brand-sub">Ascendancy take-home</span>
+      </div>
+      <div class="header-meta" id="header-meta">
+        <b>248</b> nodes · <b>532</b> edges · <b>9</b> communities
+      </div>
+    </header>
+
+    <!-- Tabs -->
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-tab="overview"    role="tab">Overview</button>
+      <button class="tab"        data-tab="network"     role="tab">Network<span class="tab-count">interactive</span></button>
+      <button class="tab"        data-tab="communities" role="tab">Communities<span class="tab-count">9</span></button>
+      <button class="tab"        data-tab="conclusions" role="tab">Conclusions</button>
+    </nav>
+
+    <!-- Overview panel -->
+    <main class="panel active" data-panel="overview">
+      <section class="overview">
+        <h1>How well-connected is this network?</h1>
+        <p class="lead">
+          The export is 248 enriched profile records — not a graph. To answer the question
+          we project a bipartite People ↔ Affiliations graph: two people get an edge when
+          they share an employer or school, weighted by tenure overlap and damped by
+          affiliation size. The result is a moderately dense small-world with a strong
+          community structure built around two visible strata.
+        </p>
+
+        <div class="metric-grid" id="metric-grid"></div>
+
+        <div class="section two-col">
+          <div class="card">
+            <h3>Top hubs <span style="color:var(--text-fade);font-weight:400;font-size:12px">(eigenvector centrality)</span></h3>
+            <ol id="hubs-list"></ol>
+          </div>
+          <div class="card">
+            <h3>Top brokers <span style="color:var(--text-fade);font-weight:400;font-size:12px">(betweenness centrality)</span></h3>
+            <ol id="brokers-list"></ol>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>The two halves</h2>
+          <p style="color:var(--text-dim);line-height:1.7;font-size:14px;max-width:720px">
+            The network splits cleanly into a <b style="color:var(--text)">Clemson alumni stratum</b>
+            (university, sub-schools, and the consulting / finance / healthcare firms its graduates
+            cluster into) and a <b style="color:var(--text)">startup-operator stratum</b>
+            (Ascendancy's founding circle, the Invisible Technologies orbit, and Social Slooth — the
+            ego's earlier startup). The two are joined by a small number of broker nodes.
+            Modularity of 0.72 quantifies how clean that split is.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Network panel -->
+    <main class="panel" data-panel="network">
+      <div id="network-canvas">
+        <div id="network-vis"></div>
+        <div class="legend">
+          <h4>Reading the graph</h4>
+          <div style="color:var(--text-dim);margin-bottom:10px;line-height:1.5">
+            Colour = Louvain community.<br/>
+            Size = weighted degree.<br/>
+            Click a node for details.
+          </div>
+          <div id="legend-communities"></div>
+        </div>
+        <div class="info-panel" id="info-panel">
+          <div class="info-name" id="info-name">—</div>
+          <div class="info-line" id="info-title"></div>
+          <div class="info-line" id="info-location"></div>
+          <div class="info-stats" id="info-stats"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Communities panel -->
+    <main class="panel" data-panel="communities">
+      <section class="overview">
+        <h1>9 communities, modularity 0.72</h1>
+        <p class="lead">
+          Louvain identifies nine well-separated communities inside the giant component.
+          Each card below shows the cluster's defining employers / schools and its highest-
+          weighted members.
+        </p>
+        <div id="community-cards" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:16px;"></div>
+      </section>
+    </main>
+
+    <!-- Conclusions panel -->
+    <main class="panel" data-panel="conclusions">
+      <article class="conclusions">
+        <Report />
+      </article>
+    </main>
+
+    <script is:inline>
+      // ----------------------- Tabs -----------------------
+      const tabs = document.querySelectorAll(".tab");
+      const panels = document.querySelectorAll(".panel");
+      tabs.forEach(t => t.addEventListener("click", () => {
+        const target = t.dataset.tab;
+        tabs.forEach(x => x.classList.toggle("active", x === t));
+        panels.forEach(p => p.classList.toggle("active", p.dataset.panel === target));
+        if (target === "network") setTimeout(() => {
+          if (window.__net) {
+            window.__net.setSize("100%", "100%");
+            window.__net.redraw();
+            window.__net.fit({ animation: { duration: 400, easingFunction: "easeOutQuad" } });
+          }
+        }, 80);
+      }));
+
+      // ----------------------- Loader status messages -----
+      const status = document.getElementById("loader-status");
+      const stages = [
+        "Parsing 248 enriched profiles…",
+        "Resolving 1,650 employment stints…",
+        "Resolving 477 education records…",
+        "Building affiliation projection…",
+        "Computing centralities…",
+        "Detecting communities…",
+        "Rendering graph…",
+      ];
+      let stageIdx = 0;
+      const stageTimer = setInterval(() => {
+        stageIdx = (stageIdx + 1) % stages.length;
+        status.textContent = stages[stageIdx];
+      }, 380);
+
+      // ----------------------- Palette --------------------
+      const PALETTE = [
+        "#e6194B","#3cb44b","#ffe119","#4363d8","#f58231",
+        "#911eb4","#42d4f4","#f032e6","#bfef45","#fabed4",
+        "#469990","#dcbeff","#9A6324","#fffac8","#800000",
+      ];
+      const colorFor = c => PALETTE[((c % PALETTE.length) + PALETTE.length) % PALETTE.length];
+
+      // ----------------------- Load + render --------------
+      fetch("/graph.json")
+        .then(r => r.json())
+        .then(data => {
+          window.__data = data;
+          renderOverview(data);
+          renderCommunities(data);
+          renderNetwork(data);
+
+          // Hide loader (give it a beat so it doesn't flash)
+          setTimeout(() => {
+            clearInterval(stageTimer);
+            status.textContent = "Ready.";
+            document.getElementById("loader").classList.add("hidden");
+          }, 700);
+        })
+        .catch(err => {
+          clearInterval(stageTimer);
+          status.textContent = "Failed to load graph.json — " + err.message;
+        });
+
+      // ----------------------- Overview -------------------
+      function renderOverview(data) {
+        const m = data.metrics;
+        const grid = document.getElementById("metric-grid");
+        const cells = [
+          ["Nodes", m.nodes, "people in the export"],
+          ["Edges", m.edges, "inferred shared-affiliation ties"],
+          ["Density", m.density.toFixed(4), `${(m.density * 100).toFixed(2)}% of possible edges`],
+          ["Avg degree", m.avg_degree, "ties per person"],
+          ["Giant component", `${m.giant_component_size}`, `${Math.round(m.giant_component_size / m.nodes * 100)}% of network`],
+          ["Avg shortest path", m.giant_avg_shortest_path, "hops, inside the giant"],
+          ["Modularity", m.louvain_modularity, "very strong clustering"],
+          ["Isolated nodes", m.isolated_nodes, "no inferable peers"],
+        ];
+        grid.innerHTML = cells.map(([l, v, n]) =>
+          `<div class="metric"><div class="metric-label">${l}</div><div class="metric-value">${v}</div><div class="metric-note">${n}</div></div>`
+        ).join("");
+
+        // Hubs by eigenvector
+        const hubs = [...data.nodes].sort((a, b) => b.eigenvector - a.eigenvector).slice(0, 8);
+        document.getElementById("hubs-list").innerHTML = hubs.map(n =>
+          `<li><span><b>${escapeHtml(n.name || "—")}</b><br><span style="color:var(--text-fade);font-size:12px">${escapeHtml(n.title || "")} ${n.company ? "· " + escapeHtml(n.company) : ""}</span></span><span class="num">${n.eigenvector.toFixed(3)}</span></li>`
+        ).join("");
+
+        // Brokers by betweenness
+        const brokers = [...data.nodes].sort((a, b) => b.betweenness - a.betweenness).slice(0, 8);
+        document.getElementById("brokers-list").innerHTML = brokers.map(n =>
+          `<li><span><b>${escapeHtml(n.name || "—")}</b><br><span style="color:var(--text-fade);font-size:12px">${escapeHtml(n.title || "")} ${n.company ? "· " + escapeHtml(n.company) : ""}</span></span><span class="num">${n.betweenness.toFixed(3)}</span></li>`
+        ).join("");
+
+        // Header meta
+        document.getElementById("header-meta").innerHTML =
+          `<b>${m.nodes}</b> nodes · <b>${m.edges}</b> edges · <b>${m.louvain_communities}</b> communities`;
+      }
+
+      // ----------------------- Communities ----------------
+      function renderCommunities(data) {
+        const cards = data.communities.map(c => {
+          const cos = (c.top_companies || []).map(([n, k]) => `<li><b>${escapeHtml(n)}</b><span class="num">${k}</span></li>`).join("");
+          const sch = (c.top_schools || []).map(([n, k]) => `<li><b>${escapeHtml(n)}</b><span class="num">${k}</span></li>`).join("");
+          const ppl = (c.top_people || []).map(p => `<li><b>${escapeHtml(p)}</b></li>`).join("");
+          return `
+            <div class="card">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+                <span style="width:14px;height:14px;border-radius:50%;background:${colorFor(c.community)};box-shadow:0 0 8px ${colorFor(c.community)}55"></span>
+                <h3 style="margin:0">Community ${c.community} · <span style="color:var(--text-dim);font-weight:400">${c.size} people</span></h3>
+              </div>
+              <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-fade);margin:8px 0 6px">Top people</div>
+              <ul>${ppl}</ul>
+              <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-fade);margin:14px 0 6px">Companies</div>
+              <ul>${cos}</ul>
+              ${sch ? `<div style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-fade);margin:14px 0 6px">Schools</div><ul>${sch}</ul>` : ""}
+            </div>
+          `;
+        }).join("");
+        document.getElementById("community-cards").innerHTML = cards;
+      }
+
+      // ----------------------- Network --------------------
+      function renderNetwork(data) {
+        // Legend
+        const counts = {};
+        data.nodes.forEach(n => { counts[n.community] = (counts[n.community] || 0) + 1; });
+        const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+        document.getElementById("legend-communities").innerHTML = sorted.map(([c, k]) =>
+          `<div class="legend-row"><span class="legend-dot" style="background:${colorFor(+c)}"></span>Community ${c} · ${k}</div>`
+        ).join("");
+
+        // vis dataset
+        const nodes = data.nodes.map(n => ({
+          id: n.id,
+          label: (n.name || "").split(" ").slice(0, 2).join(" "),
+          title: `${n.name}\n${n.title || ""}${n.company ? " @ " + n.company : ""}\n${n.location || ""}\ncommunity ${n.community}`,
+          color: { background: colorFor(n.community), border: "#222", highlight: { background: "#ff7849", border: "#fff" } },
+          value: Math.max(1, n.weighted_degree),
+          font: { color: "#e8e8ee", size: 11, face: "Inter" },
+        }));
+        const edges = data.edges.map(e => ({
+          from: e.source, to: e.target, value: e.weight, title: e.evidence || "",
+          color: { color: "rgba(180,180,200,0.18)", highlight: "#ff7849" },
+          smooth: false,
+        }));
+
+        const container = document.getElementById("network-vis");
+        const net = new vis.Network(container, { nodes, edges }, {
+          nodes: { shape: "dot", scaling: { min: 8, max: 40 }, borderWidth: 1 },
+          edges: { width: 0.5, scaling: { min: 0.4, max: 4 } },
+          interaction: { hover: true, tooltipDelay: 200, hideEdgesOnDrag: true },
+          physics: {
+            solver: "forceAtlas2Based",
+            forceAtlas2Based: { gravitationalConstant: -55, centralGravity: 0.006, springLength: 130, springConstant: 0.045, damping: 0.6 },
+            stabilization: { iterations: 300 },
+          },
+        });
+        window.__net = net;
+
+        // Info panel on click
+        const panel = document.getElementById("info-panel");
+        net.on("click", params => {
+          if (!params.nodes.length) { panel.classList.remove("visible"); return; }
+          const id = params.nodes[0];
+          const n = data.nodes.find(x => x.id === id);
+          if (!n) return;
+          document.getElementById("info-name").textContent = n.name || "—";
+          document.getElementById("info-title").textContent = [n.title, n.company].filter(Boolean).join(" @ ");
+          document.getElementById("info-location").textContent = n.location || "";
+          document.getElementById("info-stats").innerHTML = `
+            <span>degree <b>${n.degree}</b></span>
+            <span>w-deg <b>${n.weighted_degree.toFixed(1)}</b></span>
+            <span>btw <b>${n.betweenness.toFixed(3)}</b></span>
+            <span>eig <b>${n.eigenvector.toFixed(3)}</b></span>
+            <span>C<b>${n.community}</b></span>
+          `;
+          panel.classList.add("visible");
+        });
+      }
+
+      function escapeHtml(s) {
+        return String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+      }
+    </script>
+  </body>
+</html>

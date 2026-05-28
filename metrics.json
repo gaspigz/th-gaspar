@@ -1,0 +1,139 @@
+{
+  "nodes": 248,
+  "edges": 532,
+  "density": 0.01737,
+  "avg_degree": 4.29,
+  "isolated_nodes": 80,
+  "connected_components": 90,
+  "component_sizes_top5": [
+    139,
+    6,
+    5,
+    4,
+    3
+  ],
+  "giant_component_size": 139,
+  "giant_component_edges": 502,
+  "giant_diameter": 10,
+  "giant_avg_shortest_path": 3.968,
+  "avg_clustering_coef": 0.3584,
+  "global_transitivity": 0.7863,
+  "louvain_communities": 9,
+  "louvain_modularity": 0.7198,
+  "top_companies_by_size_in_network": [
+    {
+      "company": "Clemson University",
+      "people": 73
+    },
+    {
+      "company": "Clemson University College of Engineering, Computing and Applied Sciences",
+      "people": 18
+    },
+    {
+      "company": "Social Slooth",
+      "people": 16
+    },
+    {
+      "company": "Invisible Technologies",
+      "people": 9
+    },
+    {
+      "company": "Ascendancy",
+      "people": 5
+    },
+    {
+      "company": "LPL Financial",
+      "people": 5
+    },
+    {
+      "company": "Clemson University Social Media Listening Center",
+      "people": 5
+    },
+    {
+      "company": "Google",
+      "people": 4
+    },
+    {
+      "company": "Accenture",
+      "people": 4
+    },
+    {
+      "company": "Amazon",
+      "people": 4
+    },
+    {
+      "company": "1223",
+      "people": 4
+    },
+    {
+      "company": "Prisma Health",
+      "people": 4
+    },
+    {
+      "company": "Visionary Ventures",
+      "people": 3
+    },
+    {
+      "company": "Bellhop",
+      "people": 3
+    },
+    {
+      "company": "National Science Foundation ",
+      "people": 3
+    }
+  ],
+  "top_schools_by_size_in_network": [
+    {
+      "school": "Clemson University",
+      "people": 118
+    },
+    {
+      "school": "University of South Carolina",
+      "people": 5
+    },
+    {
+      "school": "Wilbur O. and Ann Powers College of Business at Clemson University",
+      "people": 5
+    },
+    {
+      "school": "Cornell University",
+      "people": 4
+    },
+    {
+      "school": "University of Central Florida",
+      "people": 4
+    },
+    {
+      "school": "Clemson University College of Engineering, Computing and Applied Sciences",
+      "people": 4
+    },
+    {
+      "school": "Wren High School",
+      "people": 4
+    },
+    {
+      "school": "Furman University",
+      "people": 3
+    },
+    {
+      "school": "University of Oxford",
+      "people": 3
+    },
+    {
+      "school": "Academic Magnet High School",
+      "people": 3
+    }
+  ],
+  "excluded_noisy_companies": [
+    {
+      "company": "Clemson University",
+      "people": 73
+    }
+  ],
+  "excluded_noisy_schools": [
+    {
+      "school": "Clemson University",
+      "people": 118
+    }
+  ]
+}

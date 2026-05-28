@@ -1,0 +1,249 @@
+id,name,current_company,current_title,location,degree,weighted_degree,degree_centrality,betweenness,eigenvector,community,in_giant_component
+009a6dca-d736-42dc-a76a-9aaed63c5150,Kasey Jordan,"Carolina Precision Foods, LLC",Sales and Supply Chain Coordinator,"Florence, South Carolina, United States",4,4.454,0.0,0.0,0.0,-1,False
+be7ad081-671c-49f9-9d1a-d1f9bf87ae52,Joe Foster,Greenville Area Development Corporation ,Research Associate,"Greenville, South Carolina, United States",4,4.454,0.0,0.0,0.0,-1,False
+6b40cb16-b0c8-4c38-b142-448c0dcba120,Matthew Price,WebsterRogers LLP,Audit Associate,"Florence, South Carolina, United States",4,4.24,0.0,0.0,0.0,-1,False
+4bc4e4b6-f23b-47f3-b5c6-59a91bb29613,Linda “Riley” Eich,An Orthodox Workshop,Co-Owner,"Greenville, South Carolina, United States",4,2.955,0.0,0.0,0.0,-1,False
+4ba99a58-5d72-4872-b4d8-80b171d69c4d,Brynn Beaton,Techtronic Industries - TTI,Field Sales and Marketing Representative,"Austin, Texas, United States",2,2.382,0.0,0.0,0.0,-1,False
+3fddd4f3-a4d9-46c7-9c6d-747cfa1d7ca7,Kayla Hockstra,Wears Valley Ranch,High School Science Teacher,"Atlanta, Georgia, United States",2,2.382,0.0,0.0,0.0,-1,False
+fb728c5d-6c27-469c-9d8f-f4807a40354f,Ryan Mahon,Amazon,SDE I,"Washington, United States",3,2.372,0.0,0.0,0.0,-1,False
+a4e5158e-23bd-473e-bded-f4c456e436a8,Jessica L.,Amazon,UX Research Coordinator,"Seattle, Washington, United States",3,1.814,0.0,0.0,0.0,-1,False
+d26430c3-741a-478e-a2ea-c62527b4a0c5,Julia Wood,Battelle,Chemical Engineer I,"Westerville, Ohio, United States",4,1.357,0.0,0.0,0.0,-1,False
+2981b85f-9d01-4c1b-82f4-6f5153f53ca1,kristin williamson lewis,Openfields,Special Projects,"Greenville, South Carolina, United States",2,1.243,0.0,0.0,0.0,-1,False
+7ffe8a21-3e8a-46c0-be43-c0c441f66add,John M.,"RedFile Technologies, Inc.",Founder/CEO @ RedFile AI,"Dallas, Texas, United States",1,1.142,0.0,0.0,0.0,-1,False
+bcf0c6d6-7df0-43d6-bafe-95f69087d42e,Jonathan Nystrom,"Solutionz Group, LLC",Sounding Board Member - Business Development,"Chantilly, Virginia, United States",1,1.142,0.0,0.0,0.0,-1,False
+53496edf-11a4-4128-92da-c545872cd588,Brandon Wingard,International Atomic Energy Agency ,Associate Equipment Data Management Engineer,"Greenville, South Carolina, United States",3,1.116,0.0,0.0,0.0,-1,False
+49c75fb2-f54b-42cf-9fdd-a42526ca9ec9,Bob S. Heath,Applied research Center (ARC),Principal Research Fellow at the Applied Research Center (ARC),United States,1,1.082,0.0,0.0,0.0,-1,False
+dddfe2fb-7e5c-443e-b676-ab4082709c15,Jake Groth,SCA Health,"Sr. Manager, Data Engineering","Winter Garden, Florida, United States",1,1.082,0.0,0.0,0.0,-1,False
+5e437e3e-aa1c-4ead-83d4-4c972a8ae93a,Caitlin C,XG Consultants Group,Media Analyst Ii,"Buffalo, New York, United States",2,0.902,0.0,0.0,0.0,-1,False
+12c42251-b22b-4dbc-a791-8ed946d9ba2b,Tyler S.,United States Air Force,USAF,"Pickens, South Carolina, United States",5,0.875,0.0,0.0,0.0,-1,False
+3e000c22-fc15-4f7f-b1a7-b0634df00987,Jaime Altkin,Corporate Resolutions Inc.,"Senior Manager, Investigative Research","New York, New York, United States",1,0.721,0.0,0.0,0.0,-1,False
+746c6a2a-18bf-4c79-9a2c-16d1ad975621,Caroline George,Professional Testing,Psychometrician,"Denver, Colorado, United States",1,0.721,0.0,0.0,0.0,-1,False
+fe6d853b-92d3-4ff9-8ec8-41db559ce987,Aishah Khan,Hogan Assessment Systems,Talent Analytics Intern,"Clemson, South Carolina, United States",1,0.721,0.0,0.0,0.0,-1,False
+9d435286-b67b-4524-a5ea-11cdcda0b5f3,Damion Anderson,Guitar Artistry Program,Founder,"Lexington, South Carolina, United States",2,0.721,0.0,0.0,0.0,-1,False
+6130a014-4b05-4f3c-b3be-4788e4f66ba6,Lindsey Myers,Ender,Senior Software Engineer,"Austin, Texas, United States",1,0.361,0.0,0.0,0.0,-1,False
+c55c53fc-a55e-4db2-9b9f-2127a68136f4,Kevin B.,BigBear.ai,Senior OSINT Analyst,"Washington, United States",1,0.361,0.0,0.0,0.0,-1,False
+ac0d02b2-4690-4eb4-b0fc-50d908ee9862,Noah Hubbard,Terratory,Sales Manager,"Seneca, South Carolina, United States",1,0.361,0.0,0.0,0.0,-1,False
+b3873808-9617-41c1-8f2c-74117ad1d052,Ryan Mai-Do,Mercer University Athletics,Director of Marketing & Fan Experience,"Macon, Georgia, United States",2,0.361,0.0,0.0,0.0,-1,False
+2d5e81fb-fd4b-4d20-ab59-a97ccbda8755,Laramie House,"SUMMIT Engineering, Laboratory & Testing, Inc.",Engineering Field Technician,"Clemson, South Carolina, United States",1,0.361,0.0,0.0,0.0,-1,False
+20c08857-2f25-4596-8e2d-8be66c8c417f,Joshua Little,Amazon Web Services,Software Development Engineer,"Alexandria, Virginia, United States",1,0.361,0.0,0.0,0.0,-1,False
+3c9b7ef4-181e-4eef-bf1c-e1d437bf76e1,John Suchanek,Johns Hopkins Applied Physics Laboratory,Sensor and Signal Processing,United States,1,0.24,0.0,0.0,0.0,-1,False
+6b2ed4a7-98bf-4f62-b194-79d40c0ecf7e,Steven Sheffield,3GIMBALS,Vice President of Solutions,"Greenville, South Carolina, United States",1,0.18,0.0,0.0,0.0,-1,False
+dee66312-dd89-46d3-859a-768605811b1c,Nicole Vasquez,MBD Partners,Chief Executive Officer,"Miami, Florida, United States",0,0.0,0.0,0.0,0.0,-1,False
+8f314971-0df7-49d9-84ee-11224e19dec1,Harsh Kumar,Technanosoft Technologies,Founder & CEO,"Delhi, India",0,0.0,0.0,0.0,0.0,-1,False
+66288157-2bac-422f-ba46-7602ddffd8ff,Juan Lapelegrina,Paramount,Artificial Intelligence Advisor,Argentina,0,0.0,0.0,0.0,0.0,-1,False
+d6844508-bc68-4798-b67f-8af116fe1a04,Andrew Linhard,SteerBridge,Senior Data Architect,"Columbia, Maryland, United States",0,0.0,0.0,0.0,0.0,-1,False
+d26d6b88-192f-409f-a272-20ebfb639041,Dexter Tortoriello,Baukunst,Collective Member,"Los Angeles, California, United States",0,0.0,0.0,0.0,0.0,-1,False
+23d49536-b854-4364-8a43-d909ed9087af,Michael Panasko,Quest Site Solutions,Director,"Greenville, South Carolina, United States",0,0.0,0.0,0.0,0.0,-1,False
+48e85fb4-3a3a-4de3-b345-1d69b13d24bf,Niyirora Gloire,MTN Group,Customer Representative at MTN,Rwanda,0,0.0,0.0,0.0,0.0,-1,False
+e9eb79d2-bf88-426d-9fb0-4f0a2509f20f,Michael Eggers,Associates Insectary,Board Member,"Los Angeles, California, United States",0,0.0,0.0,0.0,0.0,-1,False
+3269f4c9-111e-47b8-9472-24b37161c70c,Mitch Shue,Vibranium Labs,Advisory Board Member,"Clemson, South Carolina, United States",0,0.0,0.0,0.0,0.0,-1,False
+4b6bbf1a-0f44-415c-a21f-ffd6d52e3227,Misha Benjamin,BCF,Partner and Co-Lead for Tech and AI,"Montreal, Quebec, Canada",0,0.0,0.0,0.0,0.0,-1,False
+6ef7b60c-c412-4fac-bf20-8caded9d5133,Mykhaylo Oleshchuk,Codexio,Chief Operations Officer,"Sofia, София (столица), Bulgaria",0,0.0,0.0,0.0,0.0,-1,False
+7609287c-03af-43ce-b5d3-3a5207c41947,Samantha McCan,Worth Search,Senior Executive GTM SaaS Recruiter | GTM Talent Partner | VC-Backed Talent Acquisition,"Tampa, Florida, United States",0,0.0,0.0,0.0,0.0,-1,False
+982e3e58-7a6e-4d14-bb63-4541420b2a70,Anthony Ferraro,Vazkor Technologies,Senior Software Engineer,"Boston, Massachusetts, United States",0,0.0,0.0,0.0,0.0,-1,False
+7e8971e9-8750-4a76-a255-fe5fef554dd9,Michael Payne,Capsoft,Chief Revenue Officer (CRO),"American Fork, Utah, United States",0,0.0,0.0,0.0,0.0,-1,False
+f02c46ec-8ec3-4d0b-aa56-a644ce913462,Gabriel Pamies,0invader Cybersecurity,Computer Forensic & information security Analyst,"Alicante, Alicante, Spain",0,0.0,0.0,0.0,0.0,-1,False
+ab32b282-1926-4ee0-b1ec-b008aeb86135,Carl Lewis,"Accusource Investigative Solutions, Inc.",President,"Mount Dora, Florida, United States",0,0.0,0.0,0.0,0.0,-1,False
+1828da3d-db2f-44c2-906e-57f5f08cab63,Gabe Salamida,Oxenham Group,Recruiter and Account Executive,"Greenville, South Carolina, United States",0,0.0,0.0,0.0,0.0,-1,False
+77ec18c8-e1a0-4de0-996b-0560b636b4ce,Devin Mason,Minas Cleaning,Frontend Developer,"Tampa, Florida, United States",0,0.0,0.0,0.0,0.0,-1,False
+588ff5db-983d-48fd-86ab-9ee24498153e,Joseph Brady,New England Claim Association,President,United States,0,0.0,0.0,0.0,0.0,-1,False
+df71e24c-bc9d-4468-b579-067093e7edb4,Michelle Miller,FS Claim Solutions: A Verisk Business,Client Success Manager,"Jersey City, New Jersey, United States",0,0.0,0.0,0.0,0.0,-1,False
+d3201e62-30dd-41c1-a8de-23424da9c3ac,Ben April,Maltego Technologies,C​T​O,"Amherst, New Hampshire, United States",0,0.0,0.0,0.0,0.0,-1,False
+8c5433c0-c75d-49b6-a54e-115642d7638f,Caroline Murugu,The Free Website Guys,Lead Manager,Kenya,0,0.0,0.0,0.0,0.0,-1,False
+71c7c515-95e0-4930-9e4d-cb4ebb5a6ac6,Joshua Janow,SMI Aware,Chief Executive Officer,"Washington, United States",0,0.0,0.0,0.0,0.0,-1,False
+644ad904-dbd4-461b-a487-d907f9b454e7,Gabriel Castillo,Becker & Company,Private Investigator,United States,0,0.0,0.0,0.0,0.0,-1,False
+ff6d78b7-acd1-4b09-a3f9-5ab0f7d88050,Tyler J T.,Marshall Investigative Group,Research Manager,"Minneapolis, Minnesota, United States",0,0.0,0.0,0.0,0.0,-1,False
+a6e157b5-757b-42b4-a93b-ced5eaf59917,Josh Blandi,UniCourt,CEO / Co-Founder,"Tustin, California, United States",0,0.0,0.0,0.0,0.0,-1,False
+24709788-ebe9-4be9-bf24-99dac8b5f783,Jillian D.,"Platinum Protection & Investigations, LLC",Private Investigator,"Boston, Massachusetts, United States",0,0.0,0.0,0.0,0.0,-1,False
+540f4d96-1050-496f-9728-735d78f472dd,Akshay Krishna,Quince,Strategy & Analytics,"Austin, Texas, United States",0,0.0,0.0,0.0,0.0,-1,False
+ca8b1449-8de2-4ff6-8cc3-87e0f48b2ffc,Jennifer Tremaine,"interstate reporting co., inc.",Investigations Director,"Germantown, Wisconsin, United States",0,0.0,0.0,0.0,0.0,-1,False
+10fc807d-cb3a-4396-93f6-26802ed3f129,Elizabeth Wagner,Procter & Gamble Hygiene & Health Care,Manufacturing Process Engineer,"Clemson, South Carolina, United States",0,0.0,0.0,0.0,0.0,-1,False
+4627c9c0-7fdf-4fde-8dad-adf031be0c4c,Rick Hopkinson,Diamond Investigations,Director of Investigations,"Boston, Massachusetts, United States",0,0.0,0.0,0.0,0.0,-1,False
+8176bfad-6320-41e1-bf52-29d3d6c369ed,Morgan Bonenberger,Frasco,Research Investigator II,"Pittsburgh, Pennsylvania, United States",0,0.0,0.0,0.0,0.0,-1,False
+7128c7b5-d19e-47e0-99a5-68e6d2cea626,Jessica N,Hr Risk Mitigation/Lex Pro Research,Research Analyst,"Las Vegas, Nevada, United States",0,0.0,0.0,0.0,0.0,-1,False
+cca421f5-a787-4e20-b5ba-b8eb7279aa8c,Rebecca Lueckenotte,Atlas Autism Health,Operations Manager,"Jefferson City, Missouri, United States",0,0.0,0.0,0.0,0.0,-1,False
+8ab9afa6-b448-450c-81cf-2f7c6f6596c3,Duane Huysamen,IPQualityScore - IPQS.com,Senior Sales Development Representative,"Gauteng, South Africa",0,0.0,0.0,0.0,0.0,-1,False
+fa7b16a5-e205-4224-96cf-cd8b298b515c,Zenab Hussain,DE RISC GROUP,Manager operations support,"Islamabad, Islamabad, Pakistan",0,0.0,0.0,0.0,0.0,-1,False
+29b42c52-d6c4-4173-8649-4eab173a74d3,Chase P.,Renaissance Strategy Worldwide,Senior Client Partner - Pharma,"High Point, North Carolina, United States",0,0.0,0.0,0.0,0.0,-1,False
+87344fc3-f007-4177-8d57-62ffb91088b6,Alexandra Huggler,"Webutation, Inc",Quality and Intelligence Lead,"Boston, Massachusetts, United States",0,0.0,0.0,0.0,0.0,-1,False
+b844c42d-c09a-4509-b62c-cfe986faded1,Zahra Rose Ebrahimi,Clemson University,Graduate Student,"Clemson, South Carolina, United States",0,0.0,0.0,0.0,0.0,-1,False
+bf8c738c-ff28-4b2f-a88e-a2994f9c664e,Prima Consult,PRIMA DUE DILIGENCE CONSULT,Private Investigator,"Accra, Greater Accra, Ghana",0,0.0,0.0,0.0,0.0,-1,False
+a3807944-5b38-4934-8afa-3f19b27839a1,Marion Kanenson,Kanenson PI LLC,Owner/Licensed Private Investigator,"Harrisburg, Pennsylvania, United States",0,0.0,0.0,0.0,0.0,-1,False
+5b48cda3-ecce-470c-9046-b05ee6392e36,David Opfergelt,Apex Private & Fire Investigative Services,Fire Investigator / Private Investigator,"Madera, California, United States",0,0.0,0.0,0.0,0.0,-1,False
+4c69d831-f87e-4a08-bfbf-825f6def4772,Nikki Tinsman,Hodson P.I. - Investigative Solutions,Client Relations Expert,"Temecula, California, United States",0,0.0,0.0,0.0,0.0,-1,False
+1fd8bd45-6310-4ed7-8ae6-bfd1c5332f76,Duane L.,"Cornerstone Investigative Services, Inc",President,"Portland, Oregon, United States",0,0.0,0.0,0.0,0.0,-1,False
+38e0b3df-5368-40ad-b900-752e7e629149,Caleb Morgan,Day & Zimmermann,Electrical Engineer,"Greenville, South Carolina, United States",0,0.0,0.0,0.0,0.0,-1,False
+fd8c29da-a7bb-4bb8-94d0-23cd733c2c71,krishna ch,Capital One,Senior Java Developer,"Henrico County, Virginia, United States",0,0.0,0.0,0.0,0.0,-1,False
+bbdef6a7-55bb-41df-ab7e-24aea28bcb82,Joao Correia,SnowcatCloud Inc.,Founder and CEO,"San Diego, California, United States",0,0.0,0.0,0.0,0.0,-1,False
+d6854948-5fb9-4de5-90f7-41b6f6aab438,Thomas Newell,Kilpatrick Townsend & Stockton,Summer Associate | Patent Litigation,"Durham, North Carolina, United States",0,0.0,0.0,0.0,0.0,-1,False
+69e4d5bd-0f1a-4fd1-b6f5-3dd55e123909,Abhinav Mishra,HiCounselor,Marketing Specialist,"Lucknow, Uttar Pradesh, India",0,0.0,0.0,0.0,0.0,-1,False
+5d13b9c6-4944-4f31-81fd-89bee683bf66,Braden King,Bon Secours Mercy Health,Histology/Cytology Lab Assistant,"Central, South Carolina, United States",0,0.0,0.0,0.0,0.0,-1,False
+18d50b0d-16a0-4fe3-83d8-8a268f6b4d62,Mark Tietz,Raytheon,Principal Systems Engineer,"Greenville, South Carolina, United States",0,0.0,0.0,0.0,0.0,-1,False
+0643834d-196d-451f-b4c8-0169a06a2560,Benjamin Sheffield,SNI Technology,National Recruiter,"Atlanta, Georgia, United States",0,0.0,0.0,0.0,0.0,-1,False
+ee5173c5-3802-4a80-b189-9a4cb993b2d3,Parker Hundley,ICode Austin,Lead Instructor,"Austin, Texas, United States",0,0.0,0.0,0.0,0.0,-1,False
+cd5538ca-f990-4e0c-b518-f862891d38e5,Tommy Tsimbinos,Clemson University,Director of Operations-Gymnastics,"Seneca, South Carolina, United States",0,0.0,0.0,0.0,0.0,-1,False
+f0f14f45-2754-420b-a176-d89a68a24630,Ben P. Atkins,Pathrise Talent,Program Manager,"Austin, Texas, United States",0,0.0,0.0,0.0,0.0,-1,False
+b51569b5-f1e8-416f-8098-12a56c2b3cdc,Jordan Britt,RHR International,People Analytics Intern,"Clemson, South Carolina, United States",0,0.0,0.0,0.0,0.0,-1,False
+7da3ba1c-1a6a-42c6-ba50-4e476ccac63d,Rylee Bryant,Breakthru Beverage Group,On Premise Sales Representative,"Clemson, South Carolina, United States",0,0.0,0.0,0.0,0.0,-1,False
+6ff0cba4-b033-456d-b77c-3a0d4dabb4f5,Jacob Broom,Integrated Support Systems ,Software Developer,"Seneca, South Carolina, United States",0,0.0,0.0,0.0,0.0,-1,False
+ef675dc8-4d79-4e14-9708-449d9e6371ce,Ben Crooks,BeCrowned,Property Manager,"Clemson, South Carolina, United States",0,0.0,0.0,0.0,0.0,-1,False
+91b17686-8987-433e-ae62-36b432bf42ad,Ahmad Droobi,University of Calgary,Teaching Assistant,"Calgary, Alberta, Canada",0,0.0,0.0,0.0,0.0,-1,False
+80581988-3300-49fe-bee7-089bcfdc9b28,Abbey Woods,Stryker Sage,"Senior Engineer, Advanced Operations","Greater Chicago Area, United States",0,0.0,0.0,0.0,0.0,-1,False
+60b0ad78-3ec2-4126-85c2-841f856b3da3,Whit Traweek,Lee & Associates Greenville / Spartanburg,Brokerage Associate,"Greenville, South Carolina, United States",0,0.0,0.0,0.0,0.0,-1,False
+b1237573-864b-42b2-a7fa-45aa632c80f5,River Sneed,Crystal View Aerial,President and Chief Pilot,"Greenville, South Carolina, United States",0,0.0,0.0,0.0,0.0,-1,False
+968bacfb-fcac-455d-9feb-8603321ca333,Zoe McNelis,,,"Clemson, South Carolina, United States",0,0.0,0.0,0.0,0.0,-1,False
+418cbba9-f5f6-48bc-aac8-f11b84a25876,Natalie Womack,Harborview Medical Center,Acute Care Nurse,"Seattle, Washington, United States",0,0.0,0.0,0.0,0.0,-1,False
+0808a0cb-d838-429e-80d5-7a8f854118a7,Cierra Oliveira,The Bail Project,Research Scientist,"Pittsburgh, Pennsylvania, United States",0,0.0,0.0,0.0,0.0,-1,False
+d2419419-51a4-4597-8d79-7e50c2c4cb8a,Bailey Meehan,Coherent Corp.,Senior Process Development Engineer,"West Hartford, Connecticut, United States",0,0.0,0.0,0.0,0.0,-1,False
+cde7a799-9b77-4450-be38-c55e6ed3a6eb,Kunal Bajaj,Resurgent Capital Services,Workflow Analyst II,"Greenville, South Carolina, United States",0,0.0,0.0,0.0,0.0,-1,False
+453f7bec-0e10-4255-bfe9-b1a0bbbd1f79,Ward Eldred III,Market Basket,Food Service Specialist,"Clemson, South Carolina, United States",0,0.0,0.0,0.0,0.0,-1,False
+32b598c3-6595-465c-ac89-0387f6407144,Josephine Rohrer,USC Schaeffer Center for Health Policy & Economics,Research Project Specialist,"Los Angeles, California, United States",0,0.0,0.0,0.0,0.0,-1,False
+09092cf7-abd9-4500-86d3-683cb737adbc,Luke Marriner,Fluor Corporation,Associate Design Engineer - Civil,"Greenville, South Carolina, United States",0,0.0,0.0,0.0,0.0,-1,False
+50d6da66-e5a3-4f3f-97bf-3f64268b2164,Emma Shank,Anderson High School,High School English Teacher,"Cincinnati, Ohio, United States",0,0.0,0.0,0.0,0.0,-1,False
+44bed247-a9a1-4898-9db3-f3f3d674aef0,W. Thomas Catoe,American Tire Distributors,Marketing Manager (North),"Chicago, Illinois, United States",0,0.0,0.0,0.0,0.0,-1,False
+4481e8ea-f625-4aed-b3e6-b091c46d57b6,Aaron Hubbard,Volunteers of America Western Washington,Crisis Counselor,"Pendergrass, Georgia, United States",0,0.0,0.0,0.0,0.0,-1,False
+de4bddcf-5f73-43c6-9050-0a3914e61bed,Jason Teets,Sheppard Mullin Richter & Hampton LLP,Summer Associate,"Hackettstown, New Jersey, United States",0,0.0,0.0,0.0,0.0,-1,False
+aed07231-f16f-4947-8623-0e464f1b0a62,Ellie Hatcher,BIOTRONIK,Field Clinical Specialist,"Charleston, South Carolina, United States",0,0.0,0.0,0.0,0.0,-1,False
+cde59626-da70-4f5e-859a-e766a1d43db0,Wesley Nichols,Clemson University Summer Scholars,Summer Camp Counselor,"Greenville, South Carolina, United States",0,0.0,0.0,0.0,0.0,-1,False
+581dc2e1-df63-4a41-898c-f59b29186f61,Zachary Cartledge,Truist,Mortgage Servicing User Acceptance Tester II,"Greenville, South Carolina, United States",0,0.0,0.0,0.0,0.0,-1,False
+4461f1b4-60fa-4317-9903-ee15e87e8b18,Jon Parker,Daniel High School,Computer Science Teacher,"Clemson, South Carolina, United States",0,0.0,0.0,0.0,0.0,-1,False
+bb209201-10a5-4630-bbfd-e77e365a2618,Miles Freeman,Adsco Manufacturing LLC,Production Planner,"Falls County, Texas, United States",0,0.0,0.0,0.0,0.0,-1,False
+3e177243-a0d5-47af-8acf-ec2ec76a032e,Harishankar Ravindran,LPL Financial,Software Developer II,"Atlanta, Georgia, United States",7,7.243,0.0507,0.0436,0.0016,0,True
+8a46b8fd-318e-4413-b5f1-ff8f68aad989,Josh Hunt,LPL Financial,Software Engineer II,"Charlotte, North Carolina, United States",4,4.497,0.029,0.0,0.0001,0,True
+c749a79b-9ecf-41fa-9f1f-388cb34654c3,Jonathan Pearsall,Everest,IT Manager,"Orlando, Florida, United States",7,4.343,0.0507,0.1079,0.0192,0,True
+7b65a1e6-4f2d-42e9-b40f-ada12c564f51,Owen Daugherty,Accenture,Industry X Analyst,"Philadelphia, Pennsylvania, United States",6,3.134,0.0435,0.0253,0.0005,0,True
+5eba1a02-ee05-47a9-8e10-f5ca0caca802,Nathan Baker,United States Department of Defense,Research Fellow,"Haslett, Michigan, United States",3,3.086,0.0217,0.0008,0.0,0,True
+57a43b5c-93a4-48c4-951a-26432cf16aef,Alek Roehl,Clemson University,Graduate Research Assistant,"Clemson, South Carolina, United States",2,3.006,0.0145,0.0035,0.0,0,True
+176f54d0-ef00-48cd-bbd2-3169bc4a4681,Antoinette Brennan,RTO National,Data Analyst,"Simpsonville, South Carolina, United States",4,2.655,0.029,0.0,0.0001,0,True
+1bdf9315-6915-49fd-ad2d-7ec09a9356d2,Eric Mitchell,Command Investigations,Intelligence Analyst,"Orlando, Florida, United States",7,2.64,0.0507,0.0661,0.0001,0,True
+f4c5450b-68a3-4ddf-8ace-fd758573f18d,Michael Harris,Michelin,Data Scientist,"Birmingham, Alabama, United States",3,2.378,0.0217,0.0088,0.0,0,True
+f219359f-a26d-42b5-93b4-3a3679f19ae6,Madison Wilson,Deloitte,Consultant,"Arlington, Virginia, United States",5,2.306,0.0362,0.0078,0.001,0,True
+9993b889-4925-4496-ae92-85336cbb7aec,Abigail Barrett,Creative Inquiry + Undergraduate Research,Undergraduate Researcher,"Denver, Colorado, United States",5,1.913,0.0362,0.0251,0.0002,0,True
+7dd7562d-0941-4cda-b439-0397e7aa3baf,Shelia Cotten,Clemson University,Associate Vice President for Research Development,"East Lansing, Michigan, United States",6,1.884,0.0435,0.0365,0.0,0,True
+8bf03623-e302-46a5-945d-f75eb5001d68,Patrick Mondaca,Various Corporate and Public Sector Clients,Independent Research Consultant,"Brooklyn, New York, United States",6,1.639,0.0435,0.0397,0.0,0,True
+587347b8-55e1-4551-a0a0-98a0c3d00060,Cassie Wise,Groupe Michelin,IT Developer Analyst,"Greenville, South Carolina, United States",2,1.553,0.0145,0.0,0.0,0,True
+7c436edc-3fae-42de-a09e-b79527b31dd2,Kate Spellacy,Ymca - Deland,Member Service Representative,"Deland, Florida, United States",3,1.442,0.0217,0.0,0.0001,0,True
+81bf1327-708e-44c6-9ebf-e42428417f6f,Thomas Britt,Military Psychology (Journal),Editor In Chief,"Clemson, South Carolina, United States",7,1.272,0.0507,0.0453,0.0,0,True
+9484eb12-f57d-487d-8491-e0866138d4d2,William Franklin,GE Vernova,Customer Success Manager,"Clemson, South Carolina, United States",3,0.651,0.0217,0.0,0.0,0,True
+7bbe2767-17bb-4565-891d-b0f735fe5a97,Kenzie Hurley Bryant,University of West Florida,Adjunct Professor of Psychology,"Annandale, Virginia, United States",2,0.621,0.0145,0.0,0.0,0,True
+d3a11a7d-02f1-44db-b874-26c53fa5f278,Robin Kowalski,Clemson University,Professor,"Clemson, South Carolina, United States",4,0.621,0.029,0.0546,0.0002,0,True
+df804ba7-3ac0-4603-ad3a-1fae45a2e132,Patrick Rosopa,Clemson University,Professor,"Clemson, South Carolina, United States",3,0.419,0.0217,0.0,0.0001,0,True
+bc70b59c-123c-4006-aa96-a5e420173d68,Tyler Massenberg,The Robison Group,Field Investigator,"West Orange, New Jersey, United States",1,0.361,0.0072,0.0,0.0,0,True
+1f74f756-2498-4f78-af76-dd74f3d17b05,Megan Spanbauer,Martin Marietta,Management Associate- Operational Excellence,"Raleigh, North Carolina, United States",2,0.311,0.0145,0.0,0.0,0,True
+53bef234-eab3-480c-a03f-0ebcf718477e,James Faulkner,Ashley Ridge High School,Agriculture Teacher,"Summerville, South Carolina, United States",2,0.311,0.0145,0.0,0.0,0,True
+88456666-6ecb-4aa3-8749-2731b6b9a82a,MEA Alder,Satellite Investigations,Senior Research Analyst,"New York, New York, United States",1,0.18,0.0072,0.0,0.0,0,True
+44e81c55-af71-403c-bfe5-275bf942d088,Francis Pedraza,Lab.rynth,Co-Founder,"Washington, District of Columbia, United States",17,51.756,0.1232,0.1976,0.5836,1,True
+226f1f98-f6be-40ab-ac8f-4b54cb3237fe,Kamron Palizban,Ascendancy,Co-Founder & CEO,"New York, New York, United States",11,38.61,0.0797,0.0071,0.5224,1,True
+9fd97996-d0eb-46b0-9be1-d0415a70bbf1,Scott Downes,Supernal AI,CEO,"Chattanooga, Tennessee, United States",10,25.634,0.0725,0.0679,0.3532,1,True
+02b63b83-2ea3-4a06-b16f-7701a1415cdd,John Patricio,Invisible Technologies,"Partner, Director of Strategy, AI Training","New York, New York, United States",8,19.427,0.058,0.0,0.2644,1,True
+3ae18d80-7c84-4b2d-b724-af5c3561fee1,Nick McGinn,Invisible Technologies,Senior Operations Analyst,"San Diego, California, United States",8,18.766,0.058,0.0,0.2479,1,True
+3357058f-cf3c-47b5-aec5-07390a48aea3,Adam Haney,Infinity Constellation,"Partner, Head of Technology","New York, New York, United States",9,17.703,0.0652,0.0483,0.2426,1,True
+885b0728-cb20-447f-b3dd-e82249202550,Britton Ware,Invisible Technologies,Director of Information Technology,"Chattanooga, Tennessee, United States",8,15.408,0.058,0.0,0.1992,1,True
+b33550de-a2cd-4390-9e2f-107c9a75ca8d,Brian W.,Invisible Technologies,Head of Revenue Operations,"New York, New York, United States",10,11.55,0.0725,0.0082,0.1281,1,True
+5ac54d4e-9472-4ad7-8268-3c973708b5db,Naomi Einhorn,Time Machine Capital² Limited,Project Manager,United States,8,5.679,0.058,0.1503,0.0712,1,True
+cd6bbb0d-0982-40d0-9591-b62cc27766dc,Tavishi Vemuri,Turing,Lead AIT Software Development,"Hyderabad, Andhra Pradesh, India",8,5.491,0.058,0.0,0.0731,1,True
+d7bc7bfb-8f59-4832-b7b2-db4e2c7ae5cb,John Christian Kuehnert 👋,SENT Ventures,Advisor,"Greenville, South Carolina, United States",6,5.043,0.0435,0.0173,0.0431,1,True
+72a32705-9b9c-4980-8895-8a467e6eb87b,Zach Hughes,Triune Mercy Center,Board Member,United States,7,3.901,0.0507,0.0346,0.0379,1,True
+8a9a52a7-01e0-481f-856c-c797312e3f67,Riley Dixon,AT&T,Lead Client Solutions Executive 3 - SLED,"Greenville, South Carolina, United States",5,3.016,0.0362,0.0696,0.0231,1,True
+33d8d55a-d97a-4f39-8c95-0bb3e46655c2,Serena Gandhi,Zoo,Graphics Engine Software Engineer,"Philadelphia, Pennsylvania, United States",3,2.791,0.0217,0.0,0.0197,1,True
+c352eed3-6863-4ff9-96f4-a5d3e8895a0b,Shashank Shekhar,Google,Sr. Business Analyst | Google Cloud Platform | TP Supporting Google,"Gurugram, Haryana, India",5,1.985,0.0362,0.0321,0.0102,1,True
+adef8ccd-4d99-470f-b426-ec304dfbf815,Noah W.,Ascendancy,Partner,United States,1,1.863,0.0072,0.0,0.0029,1,True
+8a609c00-9948-4e6d-9188-c67fad77657b,Rush Hogan,Ascendancy Strategic Partners,Partner,"New York, New York, United States",1,1.022,0.0072,0.0,0.0026,1,True
+6ae74897-1e64-43e3-95dd-65ead83d7ffd,Rainer Franz,The Sovereignty Foundation,Director,"La Canada, Michoacán de Ocampo, Mexico",1,0.661,0.0072,0.0,0.014,1,True
+1eef7ac4-06bf-491a-9e4f-32854c2764ef,Elise Kim,,,"New York, New York, United States",3,0.558,0.0217,0.0,0.0034,1,True
+45e452be-2da6-4840-97a8-de2201396601,Alex Reynolds,ScopeStack - Services CPQ,Senior Solutions Consultant,"Taylors, South Carolina, United States",1,0.541,0.0072,0.0,0.0005,1,True
+a4c09a66-63f5-4893-abca-ad430a316698,Shubham Agrawal,Clemson University,Assistant Professor,"Central, South Carolina, United States",4,5.017,0.029,0.0121,0.0001,2,True
+0b79df67-3f37-4090-9a4a-8b0a54d1fca1,Nico Politano,Blue Mantis,Account Executive,"Jacksonville, Florida, United States",3,3.967,0.0217,0.0167,0.0,2,True
+352aab13-3637-4cd2-aa91-c7d98531d2da,Michael Tidwell,The University of Georgia,Graduate Assistant,"Atlanta, Georgia, United States",4,2.81,0.029,0.027,0.0,2,True
+ad4d8e23-d878-478c-b141-091dbac14c95,Alan Mintz,"Dunlap and Associates, Inc.",Research Consultant,"Cary, North Carolina, United States",2,2.071,0.0145,0.0,0.0001,2,True
+fa3fb97c-c1c1-48d6-bd27-30a4a2b438b7,Dustin Souders,Clemson University,Assistant Professor,"Pendleton, South Carolina, United States",2,1.984,0.0145,0.0,0.0,2,True
+08b33544-cdf0-4f43-abde-679873018cc9,Savannah Sides,Blue Mantis,Business Development Representative,"Tampa, Florida, United States",1,1.743,0.0072,0.0,0.0,2,True
+5f78d2ed-f435-4238-bac9-94b69186bbad,Amy M. Schuster,Research Administration Capacity Heightening in South Carolina (REACH-SC),Project Manager,"Clemson, South Carolina, United States",3,1.503,0.0217,0.0146,0.0,2,True
+1e383de3-2cc8-4f7f-b1ea-e3ba92ee8034,Kaleb Wilder,EO Charging,Bid Coordinator,"Greenville, South Carolina, United States",20,10.599,0.1449,0.0772,0.0001,3,True
+f21d077e-8b8a-42e2-8980-daebfc75e344,Collin Vogel,Kansai University,Undergraduate Researcher,"Clemson, South Carolina, United States",4,6.256,0.029,0.0127,0.0,3,True
+20707ce7-f56d-4dd4-9769-0a8c91ffe20c,Josh Price,Young Office,Staff Accountant,"Piedmont, South Carolina, United States",5,5.845,0.0362,0.0208,0.0,3,True
+18cab596-7be4-49f8-86d4-dbf7aec6e9d0,Thomas Whittemore,University of North Carolina at Chapel Hill,Graduate Student,"Greenville, South Carolina, United States",5,4.124,0.0362,0.0547,0.0002,3,True
+24fcf693-6e9d-4b99-b6ac-c79843fdc032,Sravani Pati,Clemson Alumni Association,Research Assistant,"Clemson, South Carolina, United States",3,1.602,0.0217,0.0037,0.0,3,True
+61ce53f8-f2d4-4b17-9ce3-0648a6d6aafa,Dr. Will Henderson,The Walt Disney Company,Sr. Marketing Insights Analyst,"Orlando, Florida, United States",3,0.491,0.0217,0.0038,0.0,3,True
+f2a8406b-05df-46b4-a3ed-baa03b155b51,Ron Groen,Tri County Ace Hardware,Retail Sales,"Easley, South Carolina, United States",2,0.311,0.0145,0.0,0.0,3,True
+4a6a0227-f049-43d5-a284-0e01bdd1364e,Gabriela Mochizuki,St. Francis Foundation - Bon Secours Health System,Patient Care Technician,"Charleston County, South Carolina, United States",3,5.097,0.0217,0.0328,0.0001,4,True
+a9966092-9e84-4fe4-891a-00a574dc8a5a,Gage Gailbreath,MITRE,Software Engineer,United States,3,4.71,0.0217,0.0081,0.0,4,True
+c6dc68df-8013-4fe8-a088-c5b986b1dd54,Devin Narula,MathWorks,Senior Associate Data Science Engineer,"Boston, Massachusetts, United States",2,4.556,0.0145,0.0,0.0,4,True
+0e78125f-d0d3-44a4-81b1-fe94339b524c,Cameron Boyce,Prisma Health,Speech-Language Pathology Intern,"Greer, South Carolina, United States",9,6.662,0.0652,0.1022,0.0,5,True
+92084f52-b087-4b80-909b-7573ecc4d861,Mattox Boyce,Advancing American Freedom,Research Assistant,"Arlington, Virginia, United States",8,5.743,0.058,0.0763,0.0003,5,True
+9ecadcae-c8d7-4a8a-899a-ca51439eb88c,Taylor Summey,Spero Financial,Marketing Communications Specialist,"Greenville, South Carolina, United States",6,3.626,0.0435,0.015,0.0,5,True
+675ccf80-8b38-4e94-a2ef-c56458374613,Jackson Merritt,Cromer Food Services,Route Sales Associate,"Clemson, South Carolina, United States",3,3.444,0.0217,0.0095,0.0,5,True
+225e2ad9-648e-48b0-949f-5189ab450c74,Lauren Merritt,Anderson Area YMCA ,Head Lifeguard,"Anderson, South Carolina, United States",5,3.439,0.0362,0.0118,0.0,5,True
+fc19aa13-30ff-4eff-9149-f603967344c6,Hemanth Reddy Peddapatla,Wise Agents,Software Engineer,"Greer, South Carolina, United States",2,2.589,0.0145,0.0,0.0,5,True
+6053150e-eb12-4ee4-8ff4-3166207299d5,Sean Ericson,STARK RFID,Operations Coordinator,"Greenville, South Carolina, United States",4,2.226,0.029,0.0368,0.0,5,True
+c613cb8b-b386-49be-a505-3d2a078ed357,Hailey Carroll,Clemson University,Teaching Assistant,"Greenville, South Carolina, United States",3,2.198,0.0217,0.0147,0.0,5,True
+0e4b0c99-0bda-41f8-a54c-f342f54af223,Nick McCormick,Resurgens Orthopaedics,Medical Assistant,"Columbia, South Carolina, United States",4,2.123,0.029,0.0311,0.0,5,True
+c29b4244-12d6-4c0b-9e8b-35e66e9fd71c,Mikayla Beers,Spero Financial,Card Solutions Specialist,"Williamston, South Carolina, United States",4,1.916,0.029,0.011,0.0001,5,True
+82c57a1d-7a30-4b1b-8706-6c513f03dce3,Katlyn Trawick,The Blood Connection,Marketing and Communications Coordinator,"Greenville, South Carolina, United States",4,1.397,0.029,0.0,0.0,5,True
+45becf5b-caab-4055-ad9c-9bd977fce892,Mariam Abdeladl,Custom tees and clothing,Sales And Marketing Associate,"Greenville, South Carolina, United States",4,1.39,0.029,0.0145,0.0,5,True
+fb73b8d4-ae9c-4595-af07-76916373325c,Sara Ciplickas,The Rolling Tape,Business Owner,United States,5,1.345,0.0362,0.0145,0.0,5,True
+e499b453-6922-4be6-a681-139c56c9ce3c,Marika Thwin,Seneca Group,Proposal Manager,"Seattle, Washington, United States",4,1.113,0.029,0.0,0.0,5,True
+45b17166-5b67-494d-8e63-26b10a73058f,Gracie Hine,EPIC iO Technologies,Junior AI Engineer,"Clemson, South Carolina, United States",2,1.036,0.0145,0.0,0.0,5,True
+5919206c-d877-42fc-8afe-7ebc40fd5991,Kelsie Dean,Lincoln Memorial University,Medical Student,"Charleston, South Carolina Metropolitan Area, United States",3,1.023,0.0217,0.0,0.0,5,True
+f65c2fa4-9bf4-42c6-b273-46497210056f,Julia Griffith,Clemson Rural Health,Mobile Clinic Intern,"Clinton, South Carolina, United States",2,0.721,0.0145,0.0028,0.0,5,True
+c63c4b1f-a19d-44f0-be7a-a5dd083cb13e,Andrew Dawkins,Southern First Bank,Client Experience Banker Manager,"Greenville, South Carolina, United States",1,0.361,0.0072,0.0,0.0,5,True
+3871c6b5-28e1-45f9-8654-e4cd18b36b46,Karina Arro,Link Digital,Business Process Coordinator / Executive Assistant to the Executive Director,United States,2,0.311,0.0145,0.0,0.0001,5,True
+89257e9f-b2c2-4632-88e9-09cab83f7367,Corey Beebe,Lakonic Studio,Senior Technical Consultant,"New York, New York, United States",1,0.18,0.0072,0.0,0.0,5,True
+221de144-1bab-4584-8bd3-972339617940,Nate Unger,Juniper Greenville,Bartender,"Seneca, South Carolina, United States",1,0.06,0.0072,0.0,0.0,5,True
+d9d35d72-298d-4243-81b8-4eccd201ea79,Mitchell Scheiper,Golden Concierge Insurance,Account Manager,"Greenville, South Carolina, United States",2,3.126,0.0145,0.0145,0.0,6,True
+9871bf7c-bb36-4bcc-8ed5-07d9b307cd5f,Sam Jackson,Booz Allen Hamilton,Software Developer,"Charleston, South Carolina, United States",3,3.066,0.0217,0.071,0.0,6,True
+17de8259-f39d-48b7-9102-f2457df39e92,Austin Wagner,Clemson VIPR-GS Research Center,Digital Simulation Developer,"Seneca, South Carolina, United States",1,2.525,0.0072,0.0,0.0,6,True
+acd5fc00-b519-4dac-9111-2cdb0f1072c4,Dylan Ross,SouthernCarlson,Warehouse Operations Specialist,"Clemson, South Carolina, United States",2,2.404,0.0145,0.0288,0.0,6,True
+52b60101-ab8a-41e0-8e7f-4cab2141ce2a,Paul Raffile,Disrupting Global Cybercrime & Human Exploitation,Cybercrime Intelligence & Investigations Leader,"New York, New York, United States",2,0.541,0.0145,0.0145,0.0,6,True
+561de8f0-43cf-47da-be65-95e7517aedb3,Jereme Holiman,Shardeum,"VP, People & Ops","Los Angeles, California, United States",1,0.18,0.0072,0.0,0.0,6,True
+82596454-8338-45ea-be1b-406c4ed4adb1,Heather H.,Social Slooth,Chief Operations Officer,"Detroit, Michigan, United States",15,26.561,0.1087,0.0,0.0005,7,True
+3b521bfc-1faa-4a49-89b9-9d2888c84fe1,Vicki M.,Cisive,Global Analyst,"Atlanta Metropolitan Area, United States",16,23.195,0.1159,0.0438,0.0019,7,True
+0f4e170b-d60e-4011-89a1-46845427ed73,Samantha Zinnes,Social Slooth,Juror Research Coordinator,"West Palm Beach, Florida, United States",17,14.438,0.1232,0.0302,0.0003,7,True
+5bd97c13-e9be-4811-b6ab-1f5dcabadbec,Jamie Walker,Social Slooth,Operations Director - Investigative Reports,"Seattle, Washington, United States",15,13.407,0.1087,0.0,0.0003,7,True
+49153733-e92f-4ee6-b42c-1597a9bd5ecf,Shanea Brodhacker,Social Slooth,Strategic Advisor- Logistics,"Indianapolis, Indiana, United States",15,12.34,0.1087,0.0,0.0003,7,True
+49b413ae-29b5-4fbf-97c0-e48bf268296e,Gina Brynildsen,Social Slooth,"Strategic Advisor, Marketing & Brand","Spring, Texas, United States",16,10.625,0.1159,0.1188,0.0011,7,True
+0558f7fd-763d-428d-a4d6-f105e2c444dd,Nisreen S.,New York City Housing Authority ,Privacy Analyst,"New York, New York, United States",15,9.947,0.1087,0.0,0.0002,7,True
+e223fc6e-33c2-4444-b30c-5b64b14e43af,Robert Joneja,Social Slooth,Research Analyst,"Los Angeles, California, United States",15,9.774,0.1087,0.0,0.0002,7,True
+01139967-3570-45b0-b57a-5d3610d69840,Nicole Ducret,Social Slooth,Research Analyst,"Brooklyn, New York, United States",15,8.102,0.1087,0.0,0.0002,7,True
+38bc33f1-a0d0-4020-be12-25d49cebc748,Alexander Melamed,Social Slooth,Investigations Coordinator,"Chicago, Illinois, United States",17,7.749,0.1232,0.0232,0.0002,7,True
+30b07b04-fe41-4fe2-89fa-a412b9f2753f,Emma T.,Strategic Insight Group (SIG),Intelligence Analyst,"Washington County, North Carolina, United States",16,6.889,0.1159,0.0163,0.0001,7,True
+815716b2-e9f5-4aae-8e55-2d1738bb0e8f,Samantha Franklin,Gailey Eye Clinic,Certified Patient Service Specialist,"Peoria, Illinois, United States",15,6.631,0.1087,0.0,0.0001,7,True
+d5c15a52-2441-4a26-86aa-2fd66e0a89f8,Cassidy Colarik,Parsons School of Design - The New School,Masters Student,"New York, New York, United States",15,6.516,0.1087,0.0,0.0001,7,True
+4e58392b-bbbf-45db-bfd8-a9f5b0e040bd,Sydney Prins,Avalon College Advising,Admissions Essay Reviewer,United States,15,6.256,0.1087,0.0,0.0001,7,True
+ffa4dd83-d8cf-4414-89ef-f52a71608766,Sarah Christjans,Nova Credit,Sr. Consumer Operations Associate,"Santa Barbara, California, United States",15,6.256,0.1087,0.0,0.0001,7,True
+4c63462f-3511-4d0d-b670-5416c9443e1a,Zachary Groper,Kroll,Analyst,United States,15,3.69,0.1087,0.0,0.0001,7,True
+8788f921-d37a-4405-a488-19e46b896782,Adam Tresidder,Tri-County Technical College,Adjunct Instructor,"Clemson, South Carolina, United States",2,1.924,0.0145,0.0107,0.0,7,True
+ce607c6c-a6d8-4fb8-aa21-97476646102a,Nayoung Kim,The University of Texas at Austin,Graduate Teaching Assistant,"Austin, Texas, United States",19,36.886,0.1377,0.0577,0.0006,8,True
+377ad791-2933-4737-bc7c-f50ab807146f,Brook Schmid,United States Patent and Trademark Office ,Patent Examiner,"Greenville, South Carolina, United States",17,27.122,0.1232,0.0,0.0005,8,True
+ad8541d7-c4b4-4b9b-89b1-05465a81cafb,Yvonne Atieh,KCI,Water Resources E.I.T.,"Greenville, South Carolina, United States",18,15.141,0.1304,0.0106,0.0003,8,True
+fd2b7c15-1410-4766-b863-530547490999,Douglas Martin,TIC - The Industrial Company,Field/Office Engineer,"Easley, South Carolina, United States",20,14.6,0.1449,0.0174,0.0002,8,True
+a0ae34fe-3b07-408e-9f4d-b8ee49c99272,Joshua Coleman,Manhattan Associates,Lead Software Consultant,"Atlanta, Georgia, United States",19,13.638,0.1377,0.077,0.0002,8,True
+2fadea5b-db20-49ea-8641-2f54736d09db,Raymond Kean,Anderson-Negele,Manufacturing Engineer,"Salem, South Carolina, United States",18,12.394,0.1304,0.0031,0.0001,8,True
+bb93a821-5769-47ce-a26e-dcc621248757,Brady Jacobs,Manhattan Associates,R&D Software Engineer,"Atlanta, Georgia, United States",17,12.348,0.1232,0.0,0.0002,8,True
+5b1b8580-1c19-4621-a00e-6d5f1247dd77,Dhruvi Patel,LPL Financial,Product & Tech Rotation Program Engineer I - Cloud Security,"Greenville, South Carolina, United States",22,12.288,0.1594,0.0733,0.0002,8,True
+dc786454-c8dc-4cef-b061-cde446f4681f,Tejdeep Uckoo,CodePath,Web Developer,"Clemson, South Carolina, United States",17,9.903,0.1232,0.0,0.0002,8,True
+6d8b1378-2ed4-4589-867e-73a2708d250c,Elenah Rosopa,"Clemson University College of Behavioral, Social and Health Sciences",Graduate Student,United States,24,8.599,0.1739,0.151,0.0001,8,True
+fc298c1c-3194-4e35-b176-c6c8824829fc,Divyanshu Patel,Ally,Software Engineer,"Charlotte, North Carolina, United States",22,8.107,0.1594,0.1253,0.0001,8,True
+98f3a23b-4c35-47e6-969a-bd0434d9ffa4,Matt Franchi,Design Trust for Public Space,Siegel PiTech PhD Impact Fellow,"Brooklyn, New York, United States",23,7.809,0.1667,0.2905,0.0067,8,True
+d90c06dd-f476-400d-bf54-e405f8177485,Emma Simon,Tesla,Manufacturing Engineer,"Austin, Texas, United States",18,6.437,0.1304,0.0106,0.0001,8,True
+11edb10b-dfdd-4894-93fd-d30ef89920ae,Carson Wood,"Susquehanna International Group, LLP (SIG)",Commodity Options Trader,"Philadelphia, Pennsylvania, United States",19,6.129,0.1377,0.0199,0.0001,8,True
+ed394521-d715-44dc-83ce-e17a4cd61e75,Gourish Pisal,Capgemini,Data Scientist - GEN AI Engineer,"Atlanta, Georgia, United States",17,5.842,0.1232,0.0,0.0001,8,True
+862b9298-5a3a-4026-89d1-76ed1b0138eb,Zach Boykin,EngiNearU Online Tutoring Agency,Co-Founder,"Arlington, Virginia, United States",17,5.508,0.1232,0.0,0.0001,8,True
+1a7292b2-4d03-44b5-b32e-ab8bb1b17102,Robbie Dukes,Southern Crown Partners,Software Developer,"Charleston, South Carolina, United States",5,5.029,0.0362,0.0007,0.0,8,True
+daf26aae-7491-42b0-b7a6-1505b5a76fdd,Ashley Reichard,Eastman Chemical Company-Tire Additives business,Process Improvement Engineer,"Kingsport, Tennessee, United States",17,4.84,0.1232,0.0,0.0001,8,True
+c1f87427-f511-4b83-8943-27c01b3d2563,Nicole Shertzer,PIVOTAL INJURY AND REHAB INC,Medical Assistant,"Clemson, South Carolina, United States",4,3.106,0.029,0.0315,0.0,8,True
+fb68651d-65bd-45e6-82ab-dcfbead6f62d,David Duggan,naval air warfare center aircraft division ,Computer Engineer - AI & Autonomy Branch Head of AI Research,"Patuxent River, Maryland, United States",9,2.451,0.0652,0.0168,0.0,8,True
+077f8a37-97cb-47b0-8a89-b7cb8cdd88c1,Olivia Solverson,Vanderbilt University Medical Center,Pediatric Genetic Counselor,"Nashville, Tennessee, United States",3,2.069,0.0217,0.0118,0.0,8,True
+5c7cdf36-69a3-4e16-a516-8b6e77b54db4,Nicholas Deas,Columbia Engineering,Graduate Research Assistant,"New York, New York, United States",1,1.503,0.0072,0.0,0.0004,8,True
+36cac52a-acd5-445d-ba4f-6bd1b89393fc,Caroline Barrows,Physician Assistant Program at Ohio University,PA Student Clinical Rotations,"Chapel Hill, North Carolina, United States",2,1.294,0.0145,0.0,0.0,8,True
+76519670-9ddd-432a-9f24-c5131d53c550,Nikita Anand,Protiviti,AML Analyst,"Greer, South Carolina, United States",5,1.08,0.0362,0.0145,0.0,8,True
+3c0d65c6-6904-4ecd-ba1f-044a70c45c01,Paige Watson,Auburn University,Assistant Professor of Industrial and Organizational Psychology,"Auburn, Alabama, United States",4,0.984,0.029,0.0014,0.0,8,True
+48c92143-c553-410a-9665-81a06c7627c7,Lauren Kistler,U.S. Office of Personnel Management ,Personnel Research Psychologist,"Washington, District of Columbia, United States",3,0.982,0.0217,0.0042,0.0,8,True
+40c6d919-2489-4e2f-a038-ae12d0070f91,Vamsi Krishna Pasam,Fiserv Korea,Machine Learning Engineer,"Clemson, South Carolina, United States",2,0.88,0.0145,0.0,0.0,8,True
+a28452d0-305f-4a1a-ad53-d33057f5bc62,Sergio Gonzalez Varela,UCLA Journal of International Law and Foreign Affairs,Managing Editor,"Los Angeles, California, United States",2,0.621,0.0145,0.0,0.0,8,True
+cf7ff3ce-2e2b-4591-a1c1-98cfc5415549,Tiffany Jenkins,Troutman Pepper Locke LLP,Director of Research Services,"Mechanicsville, Virginia, United States",4,0.514,0.029,0.0,0.0,8,True
+8e8fb932-4832-4e07-84ba-763debbc056d,Kevin Zaiontz,Poth High School,Student,"San Antonio, Texas, United States",1,0.361,0.0072,0.0,0.0,8,True
+05951ce7-ca04-4f4a-9a56-888cee34180c,Gracie Boyce,Federal Reserve Board,Research Assistant,"Washington, District of Columbia, United States",1,0.361,0.0072,0.0,0.0,8,True
+5691488e-ea42-4b7c-9684-fb4177710398,Austin Farkas,MX Physical Therapy,Physical Therapist,"Greenville, South Carolina, United States",1,0.361,0.0072,0.0,0.0,8,True
+8df155d7-fb15-445a-838c-8a79854fac85,Hannah Fowler,Jeppesen Sanderson,Software Application Developer 2,"Chapel Hill, North Carolina, United States",1,0.361,0.0072,0.0,0.0,8,True
+03df0c86-2e65-422b-a439-04ef820d21b7,Maria Del Mastro,The Citadel,Community Engagement Fellow,"Charleston, South Carolina, United States",1,0.18,0.0072,0.0,0.0,8,True

@@ -1,0 +1,419 @@
+[
+  {
+    "community": 8,
+    "size": 34,
+    "top_people": [
+      "Nayoung Kim",
+      "Brook Schmid",
+      "Yvonne Atieh",
+      "Douglas Martin",
+      "Joshua Coleman"
+    ],
+    "top_companies": [
+      [
+        "Clemson University",
+        38
+      ],
+      [
+        "Clemson University College of Engineering, Computing and Applied Sciences",
+        31
+      ],
+      [
+        "4lifefitness",
+        6
+      ],
+      [
+        "Troutman Pepper",
+        5
+      ],
+      [
+        "Clemson University College of Behavioral, Social and Health Sciences",
+        4
+      ]
+    ],
+    "top_schools": [
+      [
+        "Clemson University",
+        27
+      ],
+      [
+        "University of South Carolina",
+        4
+      ],
+      [
+        "Clemson University College of Engineering, Computing and Applied Sciences",
+        4
+      ]
+    ]
+  },
+  {
+    "community": 0,
+    "size": 24,
+    "top_people": [
+      "Harishankar Ravindran",
+      "Josh Hunt",
+      "Jonathan Pearsall",
+      "Owen Daugherty",
+      "Nathan Baker"
+    ],
+    "top_companies": [
+      [
+        "Clemson University",
+        16
+      ],
+      [
+        "Accenture",
+        6
+      ],
+      [
+        "LPL Financial",
+        5
+      ],
+      [
+        "Michigan State University",
+        4
+      ],
+      [
+        "Ohio State University Comprehensive Cancer Center-James Cancer Hospital & Solove Research Institute",
+        4
+      ]
+    ],
+    "top_schools": [
+      [
+        "Clemson University",
+        13
+      ],
+      [
+        "University of Central Florida",
+        4
+      ],
+      [
+        "Wake Forest University",
+        3
+      ]
+    ]
+  },
+  {
+    "community": 5,
+    "size": 21,
+    "top_people": [
+      "Cameron Boyce",
+      "Mattox Boyce",
+      "Taylor Summey",
+      "Jackson Merritt",
+      "Lauren Merritt"
+    ],
+    "top_companies": [
+      [
+        "Clemson University",
+        11
+      ],
+      [
+        "Prisma Health",
+        6
+      ],
+      [
+        "Clemson University Social Media Listening Center",
+        5
+      ],
+      [
+        "Southern First Bank",
+        4
+      ],
+      [
+        "Spero Financial",
+        4
+      ]
+    ],
+    "top_schools": [
+      [
+        "Clemson University",
+        22
+      ],
+      [
+        "Riverside High School",
+        3
+      ],
+      [
+        "Louisiana State University",
+        2
+      ]
+    ]
+  },
+  {
+    "community": 1,
+    "size": 20,
+    "top_people": [
+      "Francis Pedraza",
+      "Kamron Palizban",
+      "Scott Downes",
+      "John Patricio",
+      "Nick McGinn"
+    ],
+    "top_companies": [
+      [
+        "Invisible Technologies",
+        19
+      ],
+      [
+        "Ascendancy",
+        6
+      ],
+      [
+        "AT&T",
+        5
+      ],
+      [
+        "Visionary Ventures",
+        4
+      ],
+      [
+        "Google Workspace",
+        4
+      ]
+    ],
+    "top_schools": [
+      [
+        "University of Oxford",
+        3
+      ],
+      [
+        "Cornell University",
+        3
+      ],
+      [
+        "Westminster Christian Academy (St. Louis)",
+        1
+      ]
+    ]
+  },
+  {
+    "community": 7,
+    "size": 17,
+    "top_people": [
+      "Heather H.",
+      "Vicki M.",
+      "Samantha Zinnes",
+      "Jamie Walker",
+      "Shanea Brodhacker"
+    ],
+    "top_companies": [
+      [
+        "Social Slooth",
+        31
+      ],
+      [
+        "One Source The Background Check Company",
+        3
+      ],
+      [
+        "Lafayette College",
+        2
+      ],
+      [
+        "Ponder Diversity Group, LLC",
+        2
+      ],
+      [
+        "Florida Atlantic University - College of Business",
+        2
+      ]
+    ],
+    "top_schools": [
+      [
+        "East Carolina University",
+        2
+      ],
+      [
+        "Greenwich High School",
+        1
+      ],
+      [
+        "DIS - Study Abroad",
+        1
+      ]
+    ]
+  },
+  {
+    "community": 2,
+    "size": 7,
+    "top_people": [
+      "Shubham Agrawal",
+      "Nico Politano",
+      "Michael Tidwell",
+      "Alan Mintz",
+      "Dustin Souders"
+    ],
+    "top_companies": [
+      [
+        "Clemson University",
+        9
+      ],
+      [
+        "Valdosta State University",
+        5
+      ],
+      [
+        "Blue Mantis",
+        3
+      ],
+      [
+        "USF Athletics",
+        3
+      ],
+      [
+        "Crowley",
+        2
+      ]
+    ],
+    "top_schools": [
+      [
+        "Valdosta State University",
+        2
+      ],
+      [
+        "Purdue University",
+        2
+      ],
+      [
+        "Clemson University",
+        2
+      ]
+    ]
+  },
+  {
+    "community": 3,
+    "size": 7,
+    "top_people": [
+      "Kaleb Wilder",
+      "Collin Vogel",
+      "Josh Price",
+      "Thomas Whittemore",
+      "Sravani Pati"
+    ],
+    "top_companies": [
+      [
+        "Danfoss",
+        3
+      ],
+      [
+        "Clemson Alumni Association",
+        3
+      ],
+      [
+        "Tri County Ace Hardware",
+        1
+      ],
+      [
+        "Danfoss Fluid Power",
+        1
+      ],
+      [
+        "Human-AI Empowerment Lab",
+        1
+      ]
+    ],
+    "top_schools": [
+      [
+        "Wren High School",
+        4
+      ],
+      [
+        "Southern Wesleyan University",
+        3
+      ],
+      [
+        "Clemson University",
+        3
+      ]
+    ]
+  },
+  {
+    "community": 6,
+    "size": 6,
+    "top_people": [
+      "Mitchell Scheiper",
+      "Sam Jackson",
+      "Austin Wagner",
+      "Dylan Ross",
+      "Paul Raffile"
+    ],
+    "top_companies": [
+      [
+        "Clyde",
+        2
+      ],
+      [
+        "Booz Allen Hamilton",
+        2
+      ],
+      [
+        "Golden Concierge Insurance",
+        2
+      ],
+      [
+        "Endeavor Communities",
+        2
+      ],
+      [
+        "Young Life",
+        2
+      ]
+    ],
+    "top_schools": [
+      [
+        "Clemson University",
+        4
+      ],
+      [
+        "Harvard University",
+        2
+      ],
+      [
+        "Wando High School",
+        2
+      ]
+    ]
+  },
+  {
+    "community": 4,
+    "size": 3,
+    "top_people": [
+      "Gabriela Mochizuki",
+      "Gage Gailbreath",
+      "Devin Narula"
+    ],
+    "top_companies": [
+      [
+        "MathWorks",
+        3
+      ],
+      [
+        "Clemson University",
+        3
+      ],
+      [
+        "MITRE",
+        2
+      ],
+      [
+        "Principal Financial Group",
+        1
+      ],
+      [
+        "Blackbaud",
+        1
+      ]
+    ],
+    "top_schools": [
+      [
+        "Academic Magnet High School",
+        3
+      ],
+      [
+        "Clemson University",
+        3
+      ]
+    ]
+  }
+]
