@@ -10,7 +10,7 @@
 
 The export is **not a graph** - it is 248 enriched profile records, each with experience and education histories. We have to *infer* who knows whom.
 
-I built the graph as a **projection of a bipartite affiliation graph** (People ↔ Companies + People ↔ Schools), with weights that reflect how strong the shared‑affiliation signal is:
+I built the graph as a **projection of a bipartite affiliation graph** (People <-> Companies + People <-> Schools), with weights that reflect how strong the shared‑affiliation signal is:
 
 | Edge channel | Trigger | Weight |
 |---|---|---|

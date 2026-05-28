@@ -104,7 +104,7 @@ site/                     Astro static site - four tabs:
   brokers - the people whose removal would fragment the network. Both lists
   matter for different use cases (influence vs. bridge-building).
 
-- **The two-stratum structure** (Clemson alumni network ↔ startup-operator
+- **The two-stratum structure** (Clemson alumni network <-> startup-operator
   core) is joined by only ~5 people. Strengthening those bridges - or
   identifying new ones - is the highest-leverage action for network growth.
 
