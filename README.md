@@ -1,52 +1,112 @@
 # Network Graph Analysis — Ascendancy Take-Home
 
-Analysis of a personal LinkedIn connections export (248 enriched profiles) to answer two questions:
-**How well-connected is this network?** and **What communities does it consist of?**
+> **The core problem:** the data arrives as 248 enriched profiles — *not* a
+> graph. Building useful edges from career histories is the analytical
+> challenge, and the quality of that construction determines everything that
+> follows.
+
+Relationship-intelligence products like Ascendancy derive their value from
+knowing *how* people are connected, not just *that* they are. This analysis
+turns a raw enrichment export into a weighted graph, then applies community
+detection and centrality metrics to answer two questions the product must
+answer at scale:
+
+1. **How well-connected is this network?**
+2. **What groups or clusters does it consist of?**
+
+The findings inform product questions like: *Which contacts are bridges between
+otherwise-disconnected communities? Which are likely to go dormant because they
+have no shared context with anyone else in the network? Who is the right
+introduction path between any two people?*
+
+---
 
 ## Quick start
 
 ```bash
-# Run the analysis (needs Python ≥ 3.10)
+# Run the analysis  (requires Python ≥ 3.10)
 python3 -m venv .venv && source .venv/bin/activate
 pip install networkx python-louvain matplotlib pandas pyvis
 python analyze.py
-# → writes metrics.json, communities.csv, community_summary.json,
-#   graph.graphml, network.png, network.html
+# Writes: metrics.json · communities.csv · community_summary.json
+#         graph.graphml · network.png · network.html
 
-# Serve the Astro report site
+# Serve the interactive report site
 cd site
 npm install
-npm run dev        # localhost:4321
-npm run build      # static output in site/dist/
+npm run dev        # http://localhost:4321  (hot-reload)
+npm run build      # static output → site/dist/
+npm run preview    # preview the production build locally
 ```
+
+---
 
 ## Repository layout
 
 ```
-Connections.json          raw input (248 enriched profiles)
-analyze.py                full analysis pipeline
-metrics.json              headline graph metrics
-communities.csv           per-person community + centrality
-community_summary.json    per-community top people / companies / schools
-graph.graphml             exportable graph (Gephi, Cytoscape, Neo4j)
-network.png               static visualisation
-network.html              interactive pyvis visualisation
-REPORT.md                 full write-up
-site/                     Astro report site (tabs: Overview · Network · Communities · Conclusions)
+Connections.json          raw input — 248 enriched profiles (4.6 MB)
+analyze.py                graph construction + metrics + community detection
+metrics.json              headline graph metrics (output)
+communities.csv           per-person community label + centrality scores (output)
+community_summary.json    per-community top people / companies / schools (output)
+graph.graphml             portable graph file (Gephi, Cytoscape, Neo4j-ready)
+network.png               static spring-layout visualisation
+network.html              interactive pyvis visualisation (standalone)
+REPORT.md                 full write-up: methodology, findings, limitations, next steps
+site/                     Astro static site — four tabs:
+                            Overview · Network (interactive) · Communities · Conclusions
 ```
+
+---
 
 ## Key findings
 
-| Metric | Value |
-|---|---|
-| Nodes | 248 |
-| Edges (inferred) | 532 |
-| Density | 1.74% |
-| Giant component | 139 nodes (56%) |
-| Avg shortest path | 3.97 hops |
-| Louvain communities | 9 |
-| Modularity | 0.72 |
+| Metric | Value | Interpretation |
+|---|---|---|
+| Nodes | 248 | people in the export |
+| Edges (inferred) | 532 | shared-affiliation ties |
+| Density | 1.74% | sparse — typical for a personal network |
+| Giant component | 139 (56%) | just over half are reachable from each other |
+| Avg shortest path | 3.97 hops | small-world structure inside the giant |
+| Louvain communities | 9 | — |
+| Modularity | **0.72** | very strong clustering; communities are real, not statistical noise |
+| Isolated nodes | **80 (32%)** | highest-risk contacts for relationship decay |
 
-The network splits into a **Clemson alumni stratum** and a **startup-operator stratum** (Ascendancy / Invisible Technologies / Social Slooth), joined by ~5 broker nodes. 80 nodes are isolated — direct contacts with no inferable peer, the highest-value targets for a relationship-intelligence product.
+### What the numbers mean for a relationship-intelligence product
 
-See [`REPORT.md`](REPORT.md) for the full analysis including methodology, assumptions, limitations, and next steps.
+- **Modularity 0.72** is well above the 0.4–0.6 range typical for personal
+  networks. The ego's connections live in tightly-separated silos — information
+  and introductions do *not* flow freely across the network without deliberate
+  brokerage. This is exactly the gap a product like Ascendancy fills.
+
+- **The 80 isolates** are direct connections with no inferable peer inside the
+  export. They are the contacts most likely to go cold: no mutual context, no
+  ambient social reinforcement. Surfacing these proactively ("You haven't
+  connected with X in 6 months, and they know no one else you know") is a
+  high-signal feature.
+
+- **Hubs ≠ brokers.** The top eigenvector-centrality node (Francis Pedraza,
+  eig = 0.58) and the top betweenness node (Matt Franchi, btw = 0.29) are
+  different people. A CRM that ranks contacts by degree alone misses the
+  brokers — the people whose removal would fragment the network. Both lists
+  matter for different use cases (influence vs. bridge-building).
+
+- **The two-stratum structure** (Clemson alumni network ↔ startup-operator
+  core) is joined by only ~5 people. Strengthening those bridges — or
+  identifying new ones — is the highest-leverage action for network growth.
+
+---
+
+## How the graph is built
+
+Because the source data contains no explicit edges, connections are inferred
+via a **bipartite affiliation projection**: two people share an edge when they
+overlap at the same employer or school. Edge weight reflects the strength of
+that signal — tenure overlap in months, damped by log(affiliation size) to
+prevent large employers from artificially linking the whole graph. Full
+methodology in [`REPORT.md`](REPORT.md).
+
+---
+
+See [`REPORT.md`](REPORT.md) for the complete write-up including assumptions,
+limitations, and suggested next steps.

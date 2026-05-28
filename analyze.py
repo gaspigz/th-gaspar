@@ -38,6 +38,7 @@ from __future__ import annotations
 import json
 import math
 import re
+import sys
 from collections import Counter, defaultdict
 from datetime import date
 from pathlib import Path
@@ -50,7 +51,71 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 HERE = Path(__file__).parent
-DATA = json.loads((HERE / "Connections.json").read_text())["data"]
+
+
+# ---------- input loading & validation ---------------------------------------
+
+def load_data(path: Path) -> list[dict]:
+    """Load and validate the enrichment JSON.
+
+    Expected shape: {"data": [<profile>, ...]}
+    Each profile must have at least one of 'id' or 'linkedin_url'.
+
+    Raises
+    ------
+    FileNotFoundError  – path does not exist
+    ValueError         – top-level structure is wrong or no valid records found
+    """
+    if not path.exists():
+        raise FileNotFoundError(
+            f"Input file not found: {path}\n"
+            "Expected 'Connections.json' in the same directory as analyze.py."
+        )
+
+    try:
+        raw = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"Could not parse JSON from {path}: {exc}") from exc
+
+    if not isinstance(raw, dict) or "data" not in raw:
+        raise ValueError(
+            f"Unexpected JSON shape in {path}. "
+            "Expected a top-level object with a 'data' key."
+        )
+
+    records = raw["data"]
+    if not isinstance(records, list) or len(records) == 0:
+        raise ValueError(f"'data' key is empty or not a list in {path}.")
+
+    # Soft validation: warn on records missing an identifier, skip them.
+    valid, skipped = [], []
+    for i, rec in enumerate(records):
+        if not isinstance(rec, dict):
+            skipped.append(i)
+            continue
+        if not (rec.get("id") or rec.get("linkedin_url")):
+            skipped.append(i)
+            continue
+        valid.append(rec)
+
+    if skipped:
+        print(
+            f"[warn] Skipped {len(skipped)} record(s) with no usable identifier "
+            f"(indices: {skipped[:10]}{'…' if len(skipped) > 10 else ''})."
+        )
+
+    if not valid:
+        raise ValueError("No valid records found in the input file.")
+
+    print(f"[info] Loaded {len(valid)} valid profile(s) from {path.name}.")
+    return valid
+
+
+try:
+    DATA = load_data(HERE / "Connections.json")
+except (FileNotFoundError, ValueError) as _load_err:
+    print(f"[error] {_load_err}", file=sys.stderr)
+    sys.exit(1)
 
 
 # ---------- helpers ----------------------------------------------------------
@@ -172,10 +237,19 @@ G = nx.Graph()
 for p in people:
     G.add_node(p["id"], **{k: v for k, v in p.items() if k != "id"})
 
-# A helper to add / accumulate weight with provenance
+# add_edge — idempotent weighted edge builder
+# ------------------------------------------------
+# Because multiple companies or schools can link the same pair of people,
+# this function is called many times for the same (u, v) pair. Rather than
+# appending duplicate edges (which would inflate the weight), it:
+#   • creates the edge on the first call, and
+#   • accumulates weight + provenance on subsequent calls.
+# The final weight is therefore the *sum* of all affiliation signals between
+# a pair, not the count of shared affiliations. Callers never need to guard
+# against duplicates; this is the single point where deduplication happens.
 def add_edge(u, v, w, channel, label):
     if u == v:
-        return
+        return  # self-loops are meaningless in this model
     if G.has_edge(u, v):
         d = G[u][v]
         d["weight"] += w
@@ -329,7 +403,10 @@ metrics = {
     ],
 }
 
-(HERE / "metrics.json").write_text(json.dumps(metrics, indent=2))
+try:
+    (HERE / "metrics.json").write_text(json.dumps(metrics, indent=2))
+except OSError as exc:
+    print(f"[warn] Could not write metrics.json: {exc}", file=sys.stderr)
 
 # Per-person table
 rows = []
@@ -350,7 +427,10 @@ for p in people:
         "in_giant_component": pid in giant.nodes(),
     })
 df = pd.DataFrame(rows).sort_values(["community", "weighted_degree"], ascending=[True, False])
-df.to_csv(HERE / "communities.csv", index=False)
+try:
+    df.to_csv(HERE / "communities.csv", index=False)
+except OSError as exc:
+    print(f"[warn] Could not write communities.csv: {exc}", file=sys.stderr)
 
 # Community summary: top employers/schools per community
 community_members = defaultdict(list)
@@ -386,7 +466,10 @@ for c, members in sorted(community_members.items(), key=lambda kv: -len(kv[1])):
         "top_schools": sch_counter.most_common(3),
     })
 
-(HERE / "community_summary.json").write_text(json.dumps(community_summary, indent=2))
+try:
+    (HERE / "community_summary.json").write_text(json.dumps(community_summary, indent=2))
+except OSError as exc:
+    print(f"[warn] Could not write community_summary.json: {exc}", file=sys.stderr)
 
 # graphml export - attach community + centrality so Gephi/Cytoscape can colour
 for nid in G.nodes():
@@ -396,7 +479,10 @@ for nid in G.nodes():
     G.nodes[nid]["betweenness"] = btw_cent.get(nid, 0)
     G.nodes[nid]["eigenvector"] = eig_cent.get(nid, 0)
 
-nx.write_graphml(G, HERE / "graph.graphml")
+try:
+    nx.write_graphml(G, HERE / "graph.graphml")
+except OSError as exc:
+    print(f"[warn] Could not write graph.graphml: {exc}", file=sys.stderr)
 
 # ---------- visualisations ---------------------------------------------------
 
@@ -415,7 +501,10 @@ nx.draw_networkx_labels(giant, pos, labels=labels, font_size=8)
 plt.title(f"Personal network ({n} nodes, {m} edges, {n_communities} Louvain communities)")
 plt.axis("off")
 plt.tight_layout()
-plt.savefig(HERE / "network.png", dpi=180)
+try:
+    plt.savefig(HERE / "network.png", dpi=180)
+except OSError as exc:
+    print(f"[warn] Could not write network.png: {exc}", file=sys.stderr)
 plt.close()
 
 # interactive html
@@ -437,7 +526,10 @@ for nid in G.nodes():
                  value=max(1, deg_w[nid]))
 for u, v, d in G.edges(data=True):
     net.add_edge(u, v, value=d["weight"], title=d.get("evidence", ""))
-net.write_html(str(HERE / "network.html"), notebook=False, open_browser=False)
+try:
+    net.write_html(str(HERE / "network.html"), notebook=False, open_browser=False)
+except OSError as exc:
+    print(f"[warn] Could not write network.html: {exc}", file=sys.stderr)
 
 # ---------- console summary --------------------------------------------------
 
