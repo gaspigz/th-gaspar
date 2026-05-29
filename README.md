@@ -74,16 +74,16 @@ site/                     Astro static site - four tabs:
 
 ## Key findings
 
-| Metric | Value | Interpretation |
-|---|---|---|
-| Nodes | 248 | people in the export |
-| Edges (inferred) | 532 | shared-affiliation ties |
-| Density | 1.74% | sparse - typical for a personal network |
-| Giant component | 139 (56%) | just over half are reachable from each other |
-| Avg shortest path | 3.97 hops | small-world structure inside the giant |
-| Louvain communities | 9 | - |
-| Modularity | **0.72** | very strong clustering; communities are real, not statistical noise |
-| Isolated nodes | **80 (32%)** | highest-risk contacts for relationship decay |
+| Metric | Value | Method | Interpretation |
+|---|---|---|---|
+| Nodes | 248 | - | people in the export |
+| Edges (inferred) | 532 | bipartite affiliation projection | weighted shared-employer/school ties |
+| Density | 1.74% | `nx.density` | sparse - typical for a personal network |
+| Giant component | 139 (56%) | `nx.connected_components` | largest connected subgraph |
+| Avg shortest path | 3.97 hops | `nx.average_shortest_path_length` (giant) | small-world structure |
+| Louvain communities | 9 | `python-louvain best_partition` | distinct social clusters |
+| Modularity | **0.72** | `community.modularity` | very strong clustering; communities are real, not statistical noise |
+| Isolated nodes | **80 (32%)** | degree = 0 after projection | highest-risk contacts for relationship decay |
 
 ### What the numbers mean for a relationship-intelligence product
 
