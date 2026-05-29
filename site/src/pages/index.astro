@@ -150,12 +150,13 @@ const faviconUrl = `${base}/favicon.svg`;
       <div class="paths-layout">
         <div class="paths-sidebar">
 
-          <!-- From -->
+          <!-- From: search (defaults to ego) -->
           <div>
             <div class="paths-section-label">From</div>
-            <div class="path-node-card ego-card">
-              <div class="path-node-name" id="ego-display-name">Zach Hughes</div>
-              <div class="path-node-meta" id="ego-display-meta">Co-Founder · Ascendancy</div>
+            <div class="path-search-wrap">
+              <input class="path-search" id="from-search" type="text"
+                     placeholder="Type a name…" autocomplete="off" />
+              <div class="search-dropdown" id="from-dropdown"></div>
             </div>
           </div>
 
@@ -178,9 +179,9 @@ const faviconUrl = `${base}/favicon.svg`;
             <div id="path-vis"></div>
             <div class="paths-empty" id="paths-empty">
               <div class="paths-empty-icon">⟶</div>
-              <div>Search for a person above</div>
+              <div>Select a From and a To person</div>
               <div style="color:var(--text-fade);font-size:12px;max-width:300px;line-height:1.6">
-                Finds the highest-weight introduction path from Zach.
+                Finds the highest-weight introduction path between any two people.
                 Edge weight = shared tenure (months), damped by org size.
               </div>
             </div>
@@ -389,15 +390,6 @@ const faviconUrl = `${base}/favicon.svg`;
         const nodes = data.nodes;
         const edges = data.edges;
 
-        // Update ego display card from data
-        const egNode = nodes.find(n => n.id === ego.id);
-        if (egNode) {
-          document.getElementById("ego-display-name").textContent = egNode.name || ego.name;
-          // Prefer headline over current_title/company for the ego card (more descriptive)
-          document.getElementById("ego-display-meta").textContent =
-            egNode.headline || [egNode.title, egNode.company].filter(Boolean).join(" · ") || "";
-        }
-
         // ------ Build adjacency list ------
         // adj[id] = [ {id, weight, channels, evidence, isDirect}, ... ]
         const adj = {};
@@ -412,7 +404,7 @@ const faviconUrl = `${base}/favicon.svg`;
 
         edges.forEach(e => {
           const ch = toChannels(e.channels);
-          const edgeData = { id: e.target, weight: e.weight, channels: ch, evidence: e.evidence || "", isDirect: false };
+          const edgeData    = { id: e.target, weight: e.weight, channels: ch, evidence: e.evidence || "", isDirect: false };
           const edgeDataRev = { id: e.source, weight: e.weight, channels: ch, evidence: e.evidence || "", isDirect: false };
           if (adj[e.source]) adj[e.source].push(edgeData);
           if (adj[e.target]) adj[e.target].push(edgeDataRev);
@@ -432,20 +424,15 @@ const faviconUrl = `${base}/favicon.svg`;
         // ------ Dijkstra ------
         // cost = 1 / (weight + 0.01) → higher weight = lower cost = preferred
         function dijkstra(startId, endId) {
-          const dist = {};
-          const prev = {};
-          const prevEdge = {};
+          const dist = {}, prev = {}, prevEdge = {};
           nodes.forEach(n => { dist[n.id] = Infinity; });
           dist[startId] = 0;
-
-          // Simple min-heap via sorted array (248 nodes - no perf concern)
           const pq = [{ id: startId, cost: 0 }];
 
           while (pq.length) {
             pq.sort((a, b) => a.cost - b.cost);
             const { id: u } = pq.shift();
             if (u === endId) break;
-
             for (const edge of (adj[u] || [])) {
               const cost = 1 / (edge.weight + 0.01);
               const newDist = dist[u] + cost;
@@ -459,48 +446,63 @@ const faviconUrl = `${base}/favicon.svg`;
           }
 
           if (dist[endId] === Infinity) return null;
-
-          // Reconstruct
           const path = [];
           let cur = endId;
           while (cur !== undefined) {
             path.unshift({ nodeId: cur, edge: prevEdge[cur] || null });
             cur = prev[cur];
           }
-          return path; // [{nodeId, edge (incoming edge info)}]
+          return path;
         }
 
         // ------ Node map ------
         const nodeMap = {};
         nodes.forEach(n => { nodeMap[n.id] = n; });
 
+        // ------ State ------
+        // Default source = ego (Zach Hughes); target starts empty
+        const egNode = nodes.find(n => n.id === ego.id);
+        let selectedSource = egNode || null;
+        let selectedTarget = null;
+
+        // Pre-fill FROM input with ego name
+        const fromInput    = document.getElementById("from-search");
+        const fromDropdown = document.getElementById("from-dropdown");
+        const toInput      = document.getElementById("path-search");
+        const toDropdown   = document.getElementById("search-dropdown");
+        if (selectedSource) fromInput.value = selectedSource.name || "";
+
         // ------ Render path chain ------
-        function renderPath(targetId) {
-          const result = document.getElementById("path-result");
+        function renderPath() {
+          const result  = document.getElementById("path-result");
           const emptyEl = document.getElementById("paths-empty");
 
-          if (!targetId) {
+          if (!selectedSource || !selectedTarget) {
             result.innerHTML = "";
             emptyEl.style.display = "flex";
             if (window.__pathNet) { window.__pathNet.destroy(); window.__pathNet = null; }
             return;
           }
 
-          const path = dijkstra(ego.id, targetId);
+          if (selectedSource.id === selectedTarget.id) {
+            result.innerHTML = `<div class="path-unreachable">Source and destination are the same person.</div>`;
+            emptyEl.style.display = "flex";
+            return;
+          }
+
+          const path = dijkstra(selectedSource.id, selectedTarget.id);
 
           if (!path) {
-            result.innerHTML = `<div class="path-unreachable">No path found - this person shares no inferable connection with anyone in the network.</div>`;
+            result.innerHTML = `<div class="path-unreachable">No path found — these two people share no inferable connection.</div>`;
             emptyEl.style.display = "flex";
             return;
           }
 
           emptyEl.style.display = "none";
 
-          // Stats
-          const totalHops = path.length - 1;
+          const totalHops   = path.length - 1;
           const totalWeight = path.slice(1).reduce((s, step) => s + (step.edge ? step.edge.weight : 0), 0);
 
-          // Chain HTML
           let chainHtml = `
             <div class="path-stats-row" style="margin-bottom:14px">
               <div class="path-stat"><b>${totalHops}</b> hop${totalHops !== 1 ? "s" : ""}</div>
@@ -512,9 +514,9 @@ const faviconUrl = `${base}/favicon.svg`;
           path.forEach((step, i) => {
             const n = nodeMap[step.nodeId];
             if (!n) return;
-            const isEgo = n.id === ego.id;
+            const isSource = i === 0;
             const isTarget = i === path.length - 1;
-            const cardClass = isEgo ? "ego-card" : (isTarget ? "target-card" : "");
+            const cardClass = isSource ? "ego-card" : (isTarget ? "target-card" : "");
             const community = n.community >= 0 ? `C${n.community}` : "isolated";
             chainHtml += `
               <div class="path-node-card ${cardClass}">
@@ -523,18 +525,15 @@ const faviconUrl = `${base}/favicon.svg`;
                 <span class="path-node-com">${escapeHtml(community)}</span>
               </div>
             `;
-            // Edge connector (not after last node)
             if (i < path.length - 1) {
-              const nextStep = path[i + 1];
-              const edge = nextStep.edge;
-              const ch = (edge && edge.channels && edge.channels.length) ? edge.channels.join(", ") : "direct";
-              const wt = edge ? edge.weight.toFixed(2) : "1.00";
+              const edge    = path[i + 1].edge;
+              const ch      = (edge && edge.channels && edge.channels.length) ? edge.channels.join(", ") : "direct";
+              const wt      = edge ? edge.weight.toFixed(2) : "1.00";
               const isDirect = edge && edge.isDirect;
-              const label = isDirect ? "direct connection" : ch;
               chainHtml += `
                 <div class="path-connector">
                   <div class="path-connector-line"></div>
-                  <div class="path-connector-badge">w=<span class="w-val">${wt}</span> · ${escapeHtml(label)}</div>
+                  <div class="path-connector-badge">w=<span class="w-val">${wt}</span> · ${escapeHtml(isDirect ? "direct connection" : ch)}</div>
                 </div>
               `;
             }
@@ -542,50 +541,43 @@ const faviconUrl = `${base}/favicon.svg`;
 
           chainHtml += `</div>`;
           result.innerHTML = chainHtml;
-
-          // Render mini vis
           renderPathVis(path);
         }
 
         // ------ Mini vis-network for path ------
         function renderPathVis(path) {
           const container = document.getElementById("path-vis");
-
           if (window.__pathNet) { window.__pathNet.destroy(); window.__pathNet = null; }
-
           if (!path || path.length < 2) return;
 
           const visNodes = path.map((step, i) => {
             const n = nodeMap[step.nodeId];
             if (!n) return null;
-            const isEgo = n.id === ego.id;
+            const isSource = i === 0;
             const isTarget = i === path.length - 1;
-            const col = isEgo ? "#ff7849" : (isTarget ? "#4ade80" : colorFor(n.community));
+            const col = isSource ? "#ff7849" : (isTarget ? "#4ade80" : colorFor(n.community));
             return {
               id: n.id,
               label: (n.name || "").split(" ").slice(0, 2).join("\n"),
               title: `${n.name}\n${[n.title, n.company].filter(Boolean).join(" @ ")}\ncommunity ${n.community >= 0 ? n.community : "none"}`,
-              color: { background: col, border: isEgo || isTarget ? "#fff" : "#333",
+              color: { background: col, border: isSource || isTarget ? "#fff" : "#333",
                        highlight: { background: col, border: "#fff" } },
-              font: { color: "#e8e8ee", size: 13, face: "Inter", bold: isEgo || isTarget },
-              value: isEgo || isTarget ? 3 : 1.5,
+              font: { color: "#e8e8ee", size: 13, face: "Inter", bold: isSource || isTarget },
+              value: isSource || isTarget ? 3 : 1.5,
               level: i,
             };
           }).filter(Boolean);
 
           const visEdges = path.slice(1).map((step, i) => {
-            const from = path[i].nodeId;
-            const to = step.nodeId;
             const edge = step.edge;
-            const wt = edge ? edge.weight : 1.0;
-            const isDirect = edge && edge.isDirect;
+            const wt   = edge ? edge.weight : 1.0;
             return {
-              from, to,
+              from: path[i].nodeId, to: step.nodeId,
               value: Math.max(1, Math.min(10, wt)),
               label: wt.toFixed(2),
               title: edge ? (edge.evidence || edge.channels.join(", ")) : "direct",
-              color: { color: isDirect ? "rgba(180,180,200,0.35)" : "rgba(255,120,73,0.55)", highlight: "#ff7849" },
-              dashes: isDirect,
+              color: { color: edge?.isDirect ? "rgba(180,180,200,0.35)" : "rgba(255,120,73,0.55)", highlight: "#ff7849" },
+              dashes: !!(edge?.isDirect),
               font: { color: "#6a6a78", size: 10, face: "JetBrains Mono", align: "top" },
               smooth: false,
             };
@@ -596,94 +588,92 @@ const faviconUrl = `${base}/favicon.svg`;
             edges: { width: 2, scaling: { min: 1, max: 8 }, arrows: { to: { enabled: true, scaleFactor: 0.6 } } },
             interaction: { hover: true, tooltipDelay: 150, dragNodes: false },
             physics: { enabled: false },
-            layout: {
-              hierarchical: {
-                enabled: true,
-                direction: "LR",
-                sortMethod: "directed",
-                levelSeparation: 180,
-                nodeSpacing: 100,
-              },
-            },
+            layout: { hierarchical: { enabled: true, direction: "LR", sortMethod: "directed", levelSeparation: 180, nodeSpacing: 100 } },
           });
         }
 
-        // ------ Search UI ------
-        const searchInput = document.getElementById("path-search");
-        const dropdown = document.getElementById("search-dropdown");
-        let selectedTarget = null;
-        let focusIdx = -1;
-        let dropItems = [];
+        // ------ Shared search-dropdown factory ------
+        // getExcludeId() returns the id to exclude from results (the other selected node)
+        function makeSearchUI(inputEl, dropEl, getExcludeId, onSelect) {
+          let focusIdx = -1;
+          let dropItems = [];
 
-        function showDropdown(query) {
-          const q = query.trim().toLowerCase();
-          if (q.length < 1) { dropdown.classList.remove("open"); return; }
-          const filtered = nodes
-            .filter(n => n.id !== ego.id && (n.name || "").toLowerCase().includes(q))
-            .sort((a, b) => {
-              const aStarts = (a.name || "").toLowerCase().startsWith(q);
-              const bStarts = (b.name || "").toLowerCase().startsWith(q);
-              if (aStarts && !bStarts) return -1;
-              if (!aStarts && bStarts) return 1;
-              return (a.name || "").localeCompare(b.name || "");
-            })
-            .slice(0, 12);
+          function showDrop(query) {
+            const q = query.trim().toLowerCase();
+            if (q.length < 1) { dropEl.classList.remove("open"); return; }
+            const excludeId = getExcludeId();
+            const filtered = nodes
+              .filter(n => n.id !== excludeId && (n.name || "").toLowerCase().includes(q))
+              .sort((a, b) => {
+                const aS = (a.name || "").toLowerCase().startsWith(q);
+                const bS = (b.name || "").toLowerCase().startsWith(q);
+                return aS === bS ? (a.name || "").localeCompare(b.name || "") : aS ? -1 : 1;
+              })
+              .slice(0, 12);
 
-          if (!filtered.length) { dropdown.classList.remove("open"); return; }
-
-          dropItems = filtered;
-          focusIdx = -1;
-          dropdown.innerHTML = filtered.map((n, i) =>
-            `<div class="dropdown-item" data-idx="${i}">
-               <div class="dropdown-item-name">${escapeHtml(n.name || "")}</div>
-               <div class="dropdown-item-meta">${escapeHtml([n.title, n.company].filter(Boolean).join(" · "))}</div>
-             </div>`
-          ).join("");
-          dropdown.classList.add("open");
-
-          dropdown.querySelectorAll(".dropdown-item").forEach(el => {
-            el.addEventListener("mousedown", e => {
-              e.preventDefault();
-              const idx = +el.dataset.idx;
-              selectTarget(dropItems[idx]);
+            if (!filtered.length) { dropEl.classList.remove("open"); return; }
+            dropItems = filtered;
+            focusIdx  = -1;
+            dropEl.innerHTML = filtered.map((n, i) =>
+              `<div class="dropdown-item" data-idx="${i}">
+                 <div class="dropdown-item-name">${escapeHtml(n.name || "")}</div>
+                 <div class="dropdown-item-meta">${escapeHtml([n.title, n.company].filter(Boolean).join(" · "))}</div>
+               </div>`
+            ).join("");
+            dropEl.classList.add("open");
+            dropEl.querySelectorAll(".dropdown-item").forEach(el => {
+              el.addEventListener("mousedown", e => {
+                e.preventDefault();
+                onSelect(dropItems[+el.dataset.idx]);
+              });
             });
-          });
-        }
-
-        function selectTarget(n) {
-          selectedTarget = n;
-          searchInput.value = n.name || "";
-          dropdown.classList.remove("open");
-          renderPath(n.id);
-        }
-
-        searchInput.addEventListener("input", e => {
-          selectedTarget = null;
-          showDropdown(e.target.value);
-        });
-
-        searchInput.addEventListener("keydown", e => {
-          const items = dropdown.querySelectorAll(".dropdown-item");
-          if (!items.length) return;
-          if (e.key === "ArrowDown") {
-            e.preventDefault();
-            focusIdx = Math.min(focusIdx + 1, items.length - 1);
-            items.forEach((el, i) => el.classList.toggle("focused", i === focusIdx));
-          } else if (e.key === "ArrowUp") {
-            e.preventDefault();
-            focusIdx = Math.max(focusIdx - 1, 0);
-            items.forEach((el, i) => el.classList.toggle("focused", i === focusIdx));
-          } else if (e.key === "Enter" && focusIdx >= 0) {
-            e.preventDefault();
-            selectTarget(dropItems[focusIdx]);
-          } else if (e.key === "Escape") {
-            dropdown.classList.remove("open");
           }
-        });
 
-        searchInput.addEventListener("blur", () => {
-          setTimeout(() => dropdown.classList.remove("open"), 150);
-        });
+          inputEl.addEventListener("input", e => { onSelect(null); showDrop(e.target.value); });
+
+          inputEl.addEventListener("keydown", e => {
+            const items = dropEl.querySelectorAll(".dropdown-item");
+            if (!items.length) return;
+            if (e.key === "ArrowDown") {
+              e.preventDefault();
+              focusIdx = Math.min(focusIdx + 1, items.length - 1);
+              items.forEach((el, i) => el.classList.toggle("focused", i === focusIdx));
+            } else if (e.key === "ArrowUp") {
+              e.preventDefault();
+              focusIdx = Math.max(focusIdx - 1, 0);
+              items.forEach((el, i) => el.classList.toggle("focused", i === focusIdx));
+            } else if (e.key === "Enter" && focusIdx >= 0) {
+              e.preventDefault();
+              onSelect(dropItems[focusIdx]);
+            } else if (e.key === "Escape") {
+              dropEl.classList.remove("open");
+            }
+          });
+
+          inputEl.addEventListener("blur", () => setTimeout(() => dropEl.classList.remove("open"), 150));
+        }
+
+        // FROM search
+        makeSearchUI(
+          fromInput, fromDropdown,
+          () => selectedTarget?.id,          // exclude the currently selected target
+          n => {
+            selectedSource = n;
+            if (n) { fromInput.value = n.name || ""; fromDropdown.classList.remove("open"); }
+            renderPath();
+          }
+        );
+
+        // TO search
+        makeSearchUI(
+          toInput, toDropdown,
+          () => selectedSource?.id,          // exclude the currently selected source
+          n => {
+            selectedTarget = n;
+            if (n) { toInput.value = n.name || ""; toDropdown.classList.remove("open"); }
+            renderPath();
+          }
+        );
       }
 
       function escapeHtml(s) {
