@@ -500,6 +500,73 @@ try:
 except OSError as exc:
     print(f"[warn] Could not write community_summary.json: {exc}", file=sys.stderr)
 
+# ---------- graph.json export (for the Astro frontend) -----------------------
+
+# Identify ego: the person at Ascendancy whose network this is.
+# We look for the record that is a co-founder of Ascendancy; fallback to record 0.
+def _find_ego() -> dict | None:
+    for p in people:
+        name_lower = (p.get("name") or "").lower()
+        if "zach" in name_lower and "hughes" in name_lower:
+            return p
+    # Fallback: first record
+    return people[0] if people else None
+
+_ego_person = _find_ego()
+ego_export: dict | None = None
+if _ego_person:
+    _eid = _ego_person["id"]
+    ego_export = {
+        "id": _eid,
+        "name": _ego_person.get("name", ""),
+        "title": _ego_person.get("current_title", ""),
+        "company": _ego_person.get("current_company", ""),
+        "community": partition.get(_eid, -1),
+        # All 248 contacts are direct connections; we have no interaction-frequency
+        # data, so every direct edge is assigned a uniform weight of 1.0.
+        "direct_edge_weight": 1.0,
+    }
+
+_nodes_export = []
+for p in people:
+    _nodes_export.append({
+        "id": p["id"],
+        "name": p.get("name", ""),
+        "headline": p.get("headline", ""),
+        "title": p.get("current_title", ""),
+        "company": p.get("current_company", ""),
+        "location": p.get("location", ""),
+        "linkedin": p.get("linkedin", ""),
+        "community": partition.get(p["id"], -1),
+        "degree": deg.get(p["id"], 0),
+        "weighted_degree": float(deg_w.get(p["id"], 0)),
+        "betweenness": float(btw_cent.get(p["id"], 0)),
+        "eigenvector": float(eig_cent.get(p["id"], 0)),
+    })
+
+_edges_export = []
+for u, v, d in G.edges(data=True):
+    _edges_export.append({
+        "source": u,
+        "target": v,
+        "weight": float(d.get("weight", 1.0)),
+        "channels": d.get("channels", ""),
+        "evidence": d.get("evidence", ""),
+    })
+
+_graph_out = {
+    "nodes": _nodes_export,
+    "edges": _edges_export,
+    "metrics": metrics,
+    "communities": community_summary,
+    "ego": ego_export,
+}
+try:
+    (HERE / "graph.json").write_text(json.dumps(_graph_out))
+    print(f"[info] Wrote graph.json  ({len(_nodes_export)} nodes, {len(_edges_export)} edges)")
+except OSError as exc:
+    print(f"[warn] Could not write graph.json: {exc}", file=sys.stderr)
+
 # graphml export - attach community + centrality so Gephi/Cytoscape can colour
 for nid in G.nodes():
     G.nodes[nid]["community"] = partition.get(nid, -1)

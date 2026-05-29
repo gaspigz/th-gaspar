@@ -523,6 +523,207 @@ header {
 }
 .conclusions tr:last-child td { border-bottom: none; }
 
+/* ---------- Paths tab ---------- */
+
+.panel[data-panel="paths"].active {
+  height: calc(100vh - 110px);
+  overflow: hidden;
+}
+
+.paths-layout {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  height: 100%;
+  overflow: hidden;
+}
+
+.paths-sidebar {
+  padding: 24px;
+  border-right: 1px solid var(--border-soft);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.paths-section-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-fade);
+  margin-bottom: 8px;
+}
+
+.paths-main {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.path-search-wrap {
+  position: relative;
+}
+
+.path-search {
+  width: 100%;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color .2s;
+}
+.path-search:focus { border-color: var(--accent); }
+.path-search::placeholder { color: var(--text-fade); }
+
+.search-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--bg-elev-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow-y: auto;
+  max-height: 260px;
+  z-index: 20;
+  display: none;
+  box-shadow: 0 8px 24px rgba(0,0,0,.5);
+}
+.search-dropdown.open { display: block; }
+
+.dropdown-item {
+  padding: 9px 14px;
+  cursor: pointer;
+  transition: background .12s;
+}
+.dropdown-item:hover, .dropdown-item.focused { background: var(--bg-elev); }
+.dropdown-item-name { font-size: 13px; font-weight: 500; color: var(--text); }
+.dropdown-item-meta { font-size: 11px; color: var(--text-fade); margin-top: 1px; }
+
+/* Path chain cards */
+.path-chain {
+  display: flex;
+  flex-direction: column;
+}
+
+.path-node-card {
+  background: var(--bg-elev);
+  border: 1px solid var(--border-soft);
+  border-radius: 8px;
+  padding: 13px 16px;
+}
+.path-node-card.ego-card {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent-glow);
+}
+.path-node-card.target-card {
+  border-color: #4ade80;
+  box-shadow: 0 0 0 1px rgba(74,222,128,0.2);
+}
+.path-node-name { font-weight: 600; font-size: 14px; color: var(--text); }
+.path-node-meta { font-size: 12px; color: var(--text-dim); margin-top: 3px; line-height: 1.4; }
+.path-node-com {
+  display: inline-block;
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--bg-elev-2);
+  border: 1px solid var(--border-soft);
+  border-radius: 4px;
+  padding: 1px 6px;
+  color: var(--text-fade);
+  margin-top: 5px;
+}
+
+.path-connector {
+  display: flex;
+  align-items: stretch;
+  min-height: 36px;
+  gap: 0;
+}
+.path-connector-line {
+  width: 2px;
+  background: var(--border);
+  margin: 0 14px;
+  flex-shrink: 0;
+  border-radius: 2px;
+}
+.path-connector-badge {
+  align-self: center;
+  background: var(--bg-elev-2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-fade);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.path-connector-badge .w-val {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Mini vis */
+.path-vis-wrap {
+  flex: 1;
+  position: relative;
+  min-height: 0;
+  background: var(--bg);
+}
+#path-vis {
+  width: 100%;
+  height: 100%;
+}
+
+.paths-empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--text-fade);
+  font-size: 13px;
+  text-align: center;
+  padding: 40px;
+  pointer-events: none;
+}
+.paths-empty-icon {
+  font-size: 48px;
+  opacity: 0.15;
+  line-height: 1;
+}
+
+.path-stats-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.path-stat {
+  background: var(--bg-elev);
+  border: 1px solid var(--border-soft);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-fade);
+}
+.path-stat b { color: var(--text); }
+
+.path-unreachable {
+  color: var(--text-fade);
+  font-size: 13px;
+  padding: 14px 0;
+  text-align: center;
+}
+
 /* ---------- vis-network tweaks ---------- */
 
 div.vis-tooltip {

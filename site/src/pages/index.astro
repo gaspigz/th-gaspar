@@ -68,6 +68,7 @@ const faviconUrl = `${base}/favicon.svg`;
       <button class="tab"        data-tab="network"     role="tab">Network<span class="tab-count">interactive</span></button>
       <button class="tab"        data-tab="communities" role="tab">Communities<span class="tab-count">9</span></button>
       <button class="tab"        data-tab="conclusions" role="tab">Conclusions</button>
+      <button class="tab"        data-tab="paths"       role="tab">Paths<span class="tab-count">intro finder</span></button>
     </nav>
 
     <!-- Overview panel -->
@@ -144,6 +145,50 @@ const faviconUrl = `${base}/favicon.svg`;
       </section>
     </main>
 
+    <!-- Paths panel -->
+    <main class="panel" data-panel="paths">
+      <div class="paths-layout">
+        <div class="paths-sidebar">
+
+          <!-- From -->
+          <div>
+            <div class="paths-section-label">From</div>
+            <div class="path-node-card ego-card">
+              <div class="path-node-name" id="ego-display-name">Zach Hughes</div>
+              <div class="path-node-meta" id="ego-display-meta">Co-Founder · Ascendancy</div>
+            </div>
+          </div>
+
+          <!-- To: search -->
+          <div>
+            <div class="paths-section-label">To</div>
+            <div class="path-search-wrap">
+              <input class="path-search" id="path-search" type="text"
+                     placeholder="Type a name…" autocomplete="off" />
+              <div class="search-dropdown" id="search-dropdown"></div>
+            </div>
+          </div>
+
+          <!-- Path output -->
+          <div id="path-result"></div>
+
+        </div>
+        <div class="paths-main">
+          <div class="path-vis-wrap">
+            <div id="path-vis"></div>
+            <div class="paths-empty" id="paths-empty">
+              <div class="paths-empty-icon">⟶</div>
+              <div>Search for a person above</div>
+              <div style="color:var(--text-fade);font-size:12px;max-width:300px;line-height:1.6">
+                Finds the highest-weight introduction path from Zach.
+                Edge weight = shared tenure (months), damped by org size.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
     <!-- Conclusions panel -->
     <main class="panel" data-panel="conclusions">
       <article class="conclusions">
@@ -165,6 +210,11 @@ const faviconUrl = `${base}/favicon.svg`;
             window.__net.redraw();
             window.__net.fit({ animation: { duration: 400, easingFunction: "easeOutQuad" } });
           }
+        }, 80);
+        if (target === "paths" && window.__pathNet) setTimeout(() => {
+          window.__pathNet.setSize("100%", "100%");
+          window.__pathNet.redraw();
+          window.__pathNet.fit({ animation: { duration: 300, easingFunction: "easeOutQuad" } });
         }, 80);
       }));
 
@@ -202,6 +252,7 @@ const faviconUrl = `${base}/favicon.svg`;
           renderOverview(data);
           renderCommunities(data);
           renderNetwork(data);
+          initPaths(data);
 
           // Hide loader (give it a beat so it doesn't flash)
           setTimeout(() => {
@@ -329,6 +380,309 @@ const faviconUrl = `${base}/favicon.svg`;
             <span>C<b>${n.community}</b></span>
           `;
           panel.classList.add("visible");
+        });
+      }
+
+      // ----------------------- Paths ---------------------
+      function initPaths(data) {
+        const ego = data.ego;
+        const nodes = data.nodes;
+        const edges = data.edges;
+
+        // Update ego display card from data
+        const egNode = nodes.find(n => n.id === ego.id);
+        if (egNode) {
+          document.getElementById("ego-display-name").textContent = egNode.name || ego.name;
+          // Prefer headline over current_title/company for the ego card (more descriptive)
+          document.getElementById("ego-display-meta").textContent =
+            egNode.headline || [egNode.title, egNode.company].filter(Boolean).join(" · ") || "";
+        }
+
+        // ------ Build adjacency list ------
+        // adj[id] = [ {id, weight, channels, evidence, isDirect}, ... ]
+        const adj = {};
+        nodes.forEach(n => { adj[n.id] = []; });
+
+        // channels is stored as a comma-separated string in graph.json; normalise to array
+        function toChannels(raw) {
+          if (!raw) return [];
+          if (Array.isArray(raw)) return raw;
+          return String(raw).split(",").map(s => s.trim()).filter(Boolean);
+        }
+
+        edges.forEach(e => {
+          const ch = toChannels(e.channels);
+          const edgeData = { id: e.target, weight: e.weight, channels: ch, evidence: e.evidence || "", isDirect: false };
+          const edgeDataRev = { id: e.source, weight: e.weight, channels: ch, evidence: e.evidence || "", isDirect: false };
+          if (adj[e.source]) adj[e.source].push(edgeData);
+          if (adj[e.target]) adj[e.target].push(edgeDataRev);
+        });
+
+        // Virtual direct edges: ego → every other node at weight=1.0
+        // (represents the direct 1st-degree LinkedIn connection; no interaction-strength data)
+        nodes.forEach(n => {
+          if (n.id === ego.id) return;
+          const alreadyLinked = adj[ego.id].some(x => x.id === n.id);
+          if (!alreadyLinked) {
+            adj[ego.id].push({ id: n.id, weight: 1.0, channels: ["direct"], evidence: "Direct 1st-degree connection", isDirect: true });
+            adj[n.id].push({ id: ego.id, weight: 1.0, channels: ["direct"], evidence: "Direct 1st-degree connection", isDirect: true });
+          }
+        });
+
+        // ------ Dijkstra ------
+        // cost = 1 / (weight + 0.01) → higher weight = lower cost = preferred
+        function dijkstra(startId, endId) {
+          const dist = {};
+          const prev = {};
+          const prevEdge = {};
+          nodes.forEach(n => { dist[n.id] = Infinity; });
+          dist[startId] = 0;
+
+          // Simple min-heap via sorted array (248 nodes - no perf concern)
+          const pq = [{ id: startId, cost: 0 }];
+
+          while (pq.length) {
+            pq.sort((a, b) => a.cost - b.cost);
+            const { id: u } = pq.shift();
+            if (u === endId) break;
+
+            for (const edge of (adj[u] || [])) {
+              const cost = 1 / (edge.weight + 0.01);
+              const newDist = dist[u] + cost;
+              if (newDist < dist[edge.id]) {
+                dist[edge.id] = newDist;
+                prev[edge.id] = u;
+                prevEdge[edge.id] = edge;
+                pq.push({ id: edge.id, cost: newDist });
+              }
+            }
+          }
+
+          if (dist[endId] === Infinity) return null;
+
+          // Reconstruct
+          const path = [];
+          let cur = endId;
+          while (cur !== undefined) {
+            path.unshift({ nodeId: cur, edge: prevEdge[cur] || null });
+            cur = prev[cur];
+          }
+          return path; // [{nodeId, edge (incoming edge info)}]
+        }
+
+        // ------ Node map ------
+        const nodeMap = {};
+        nodes.forEach(n => { nodeMap[n.id] = n; });
+
+        // ------ Render path chain ------
+        function renderPath(targetId) {
+          const result = document.getElementById("path-result");
+          const emptyEl = document.getElementById("paths-empty");
+
+          if (!targetId) {
+            result.innerHTML = "";
+            emptyEl.style.display = "flex";
+            if (window.__pathNet) { window.__pathNet.destroy(); window.__pathNet = null; }
+            return;
+          }
+
+          const path = dijkstra(ego.id, targetId);
+
+          if (!path) {
+            result.innerHTML = `<div class="path-unreachable">No path found - this person shares no inferable connection with anyone in the network.</div>`;
+            emptyEl.style.display = "flex";
+            return;
+          }
+
+          emptyEl.style.display = "none";
+
+          // Stats
+          const totalHops = path.length - 1;
+          const totalWeight = path.slice(1).reduce((s, step) => s + (step.edge ? step.edge.weight : 0), 0);
+
+          // Chain HTML
+          let chainHtml = `
+            <div class="path-stats-row" style="margin-bottom:14px">
+              <div class="path-stat"><b>${totalHops}</b> hop${totalHops !== 1 ? "s" : ""}</div>
+              <div class="path-stat">total weight <b>${totalWeight.toFixed(2)}</b></div>
+            </div>
+            <div class="path-chain">
+          `;
+
+          path.forEach((step, i) => {
+            const n = nodeMap[step.nodeId];
+            if (!n) return;
+            const isEgo = n.id === ego.id;
+            const isTarget = i === path.length - 1;
+            const cardClass = isEgo ? "ego-card" : (isTarget ? "target-card" : "");
+            const community = n.community >= 0 ? `C${n.community}` : "isolated";
+            chainHtml += `
+              <div class="path-node-card ${cardClass}">
+                <div class="path-node-name">${escapeHtml(n.name || "")}</div>
+                <div class="path-node-meta">${escapeHtml([n.title, n.company].filter(Boolean).join(" @ "))}</div>
+                <span class="path-node-com">${escapeHtml(community)}</span>
+              </div>
+            `;
+            // Edge connector (not after last node)
+            if (i < path.length - 1) {
+              const nextStep = path[i + 1];
+              const edge = nextStep.edge;
+              const ch = (edge && edge.channels && edge.channels.length) ? edge.channels.join(", ") : "direct";
+              const wt = edge ? edge.weight.toFixed(2) : "1.00";
+              const isDirect = edge && edge.isDirect;
+              const label = isDirect ? "direct connection" : ch;
+              chainHtml += `
+                <div class="path-connector">
+                  <div class="path-connector-line"></div>
+                  <div class="path-connector-badge">w=<span class="w-val">${wt}</span> · ${escapeHtml(label)}</div>
+                </div>
+              `;
+            }
+          });
+
+          chainHtml += `</div>`;
+          result.innerHTML = chainHtml;
+
+          // Render mini vis
+          renderPathVis(path);
+        }
+
+        // ------ Mini vis-network for path ------
+        function renderPathVis(path) {
+          const container = document.getElementById("path-vis");
+
+          if (window.__pathNet) { window.__pathNet.destroy(); window.__pathNet = null; }
+
+          if (!path || path.length < 2) return;
+
+          const visNodes = path.map((step, i) => {
+            const n = nodeMap[step.nodeId];
+            if (!n) return null;
+            const isEgo = n.id === ego.id;
+            const isTarget = i === path.length - 1;
+            const col = isEgo ? "#ff7849" : (isTarget ? "#4ade80" : colorFor(n.community));
+            return {
+              id: n.id,
+              label: (n.name || "").split(" ").slice(0, 2).join("\n"),
+              title: `${n.name}\n${[n.title, n.company].filter(Boolean).join(" @ ")}\ncommunity ${n.community >= 0 ? n.community : "none"}`,
+              color: { background: col, border: isEgo || isTarget ? "#fff" : "#333",
+                       highlight: { background: col, border: "#fff" } },
+              font: { color: "#e8e8ee", size: 13, face: "Inter", bold: isEgo || isTarget },
+              value: isEgo || isTarget ? 3 : 1.5,
+              level: i,
+            };
+          }).filter(Boolean);
+
+          const visEdges = path.slice(1).map((step, i) => {
+            const from = path[i].nodeId;
+            const to = step.nodeId;
+            const edge = step.edge;
+            const wt = edge ? edge.weight : 1.0;
+            const isDirect = edge && edge.isDirect;
+            return {
+              from, to,
+              value: Math.max(1, Math.min(10, wt)),
+              label: wt.toFixed(2),
+              title: edge ? (edge.evidence || edge.channels.join(", ")) : "direct",
+              color: { color: isDirect ? "rgba(180,180,200,0.35)" : "rgba(255,120,73,0.55)", highlight: "#ff7849" },
+              dashes: isDirect,
+              font: { color: "#6a6a78", size: 10, face: "JetBrains Mono", align: "top" },
+              smooth: false,
+            };
+          });
+
+          window.__pathNet = new vis.Network(container, { nodes: visNodes, edges: visEdges }, {
+            nodes: { shape: "dot", scaling: { min: 20, max: 50 }, borderWidth: 2 },
+            edges: { width: 2, scaling: { min: 1, max: 8 }, arrows: { to: { enabled: true, scaleFactor: 0.6 } } },
+            interaction: { hover: true, tooltipDelay: 150, dragNodes: false },
+            physics: { enabled: false },
+            layout: {
+              hierarchical: {
+                enabled: true,
+                direction: "LR",
+                sortMethod: "directed",
+                levelSeparation: 180,
+                nodeSpacing: 100,
+              },
+            },
+          });
+        }
+
+        // ------ Search UI ------
+        const searchInput = document.getElementById("path-search");
+        const dropdown = document.getElementById("search-dropdown");
+        let selectedTarget = null;
+        let focusIdx = -1;
+        let dropItems = [];
+
+        function showDropdown(query) {
+          const q = query.trim().toLowerCase();
+          if (q.length < 1) { dropdown.classList.remove("open"); return; }
+          const filtered = nodes
+            .filter(n => n.id !== ego.id && (n.name || "").toLowerCase().includes(q))
+            .sort((a, b) => {
+              const aStarts = (a.name || "").toLowerCase().startsWith(q);
+              const bStarts = (b.name || "").toLowerCase().startsWith(q);
+              if (aStarts && !bStarts) return -1;
+              if (!aStarts && bStarts) return 1;
+              return (a.name || "").localeCompare(b.name || "");
+            })
+            .slice(0, 12);
+
+          if (!filtered.length) { dropdown.classList.remove("open"); return; }
+
+          dropItems = filtered;
+          focusIdx = -1;
+          dropdown.innerHTML = filtered.map((n, i) =>
+            `<div class="dropdown-item" data-idx="${i}">
+               <div class="dropdown-item-name">${escapeHtml(n.name || "")}</div>
+               <div class="dropdown-item-meta">${escapeHtml([n.title, n.company].filter(Boolean).join(" · "))}</div>
+             </div>`
+          ).join("");
+          dropdown.classList.add("open");
+
+          dropdown.querySelectorAll(".dropdown-item").forEach(el => {
+            el.addEventListener("mousedown", e => {
+              e.preventDefault();
+              const idx = +el.dataset.idx;
+              selectTarget(dropItems[idx]);
+            });
+          });
+        }
+
+        function selectTarget(n) {
+          selectedTarget = n;
+          searchInput.value = n.name || "";
+          dropdown.classList.remove("open");
+          renderPath(n.id);
+        }
+
+        searchInput.addEventListener("input", e => {
+          selectedTarget = null;
+          showDropdown(e.target.value);
+        });
+
+        searchInput.addEventListener("keydown", e => {
+          const items = dropdown.querySelectorAll(".dropdown-item");
+          if (!items.length) return;
+          if (e.key === "ArrowDown") {
+            e.preventDefault();
+            focusIdx = Math.min(focusIdx + 1, items.length - 1);
+            items.forEach((el, i) => el.classList.toggle("focused", i === focusIdx));
+          } else if (e.key === "ArrowUp") {
+            e.preventDefault();
+            focusIdx = Math.max(focusIdx - 1, 0);
+            items.forEach((el, i) => el.classList.toggle("focused", i === focusIdx));
+          } else if (e.key === "Enter" && focusIdx >= 0) {
+            e.preventDefault();
+            selectTarget(dropItems[focusIdx]);
+          } else if (e.key === "Escape") {
+            dropdown.classList.remove("open");
+          }
+        });
+
+        searchInput.addEventListener("blur", () => {
+          setTimeout(() => dropdown.classList.remove("open"), 150);
         });
       }
 
